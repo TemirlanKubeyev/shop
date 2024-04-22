@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" href="/main.css">
+  <title>Товары</title>
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+<div class="wrapper">
+  <div class="container">
+    <h2>Заказы</h2>
+    <br>
+    <div class="filter-container" >
+      <form action="/admin/orders" method="get">
+        <select name="status" class="category-select">
+          <option th:each="status : ${orderStatus}" th:value="${status.name()}" th:text="${status}"></option>
+        </select>
+        <button class="btn">Отфильтровать</button>
+      </form>
+      <a href="/admin/orders" class="icon basket-btn">
+        <button class="btn">Сбросить фильтр</button>
+      </a>
+    </div>
+    <br>
+    <div th:each="el : ${orders}">
+      <h4>
+        <p th:text="'Заказ №: ' + ${el.getId()}"></p>
+      </h4>
+      <p th:text="'Дата заказа: ' + ${el.getOrderDate()}"></p>
+      <p th:text="'Адрес доставки: ' + ${el.getAddress()}"></p>
+      <p th:text="'Пользватель: ' + ${el.getUser().getFirstName() + ' ' + el.getUser().getLastName()}"></p>
+      <p th:text="'Текущий статус заказа: ' + ${el.getStatus()}"></p>
+      <form th:action="'/admin/orders/status/' + ${el.getId()}" method="post">
+        <select name="orderStatus" class="category-select">
+          <option th:each="status : ${orderStatus}" th:value="${status}" th:text="${status.name()}"></option>
+        </select>
+        <button type="submit" class="btn">Изменить статус</button>
+        <br>
+      </form>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
+
+

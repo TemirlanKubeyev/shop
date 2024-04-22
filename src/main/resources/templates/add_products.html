@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" href="/main.css">
+  <title>Товары</title>
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+<div class="wrapper">
+  <div class="container">
+    <h2>Выберите категорию товара</h2><br>
+    <form action="/add_products_with_chars" method="get">
+      <select name="category" class="category-select">
+        <option th:each="cat :${category}" th:value="${cat.getId()}" th:text="${cat.getName()}"></option>
+      </select>
+    <button type="submit" class="btn">Далее</button>
+    </form>
+  </div>
+</div>
+</body>
+</html>
+

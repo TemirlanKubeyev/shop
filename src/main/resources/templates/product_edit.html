@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" href="/main.css">
+  <title>Товары</title>
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+<div class="wrapper">
+  <div class="container">
+    <h2>Редактирование товара</h2>
+    <form method="post">
+      <p th:text="'Id товара: ' + ${product.getId()}"></p>
+      <p th:text="'Категория товара: ' + ${product.getCategory().getName()}"></p>
+      <input type="text" name="name" th:placeholder="'Название: ' + ${product.getName()}" class="input_edit"><br>
+      <input type="text" name="price" th:placeholder="'Цена: ' + ${product.getPrice()}" class="input_edit"><br>
+      <div th:each="opt, val : ${options}">
+        <input type="text" th:name="values" th:placeholder="${opt.getOption()} + ': ' + ${values.get(val.index)}" class="input_edit">
+      </div>
+      <button type="submit" class="btn reset">Готово</button>
+    </form>
+  </div>
+</div>
+</body>
+</html>
+

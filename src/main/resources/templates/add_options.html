@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" href="/main.css">
+  <title>Товары</title>
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+<div class="wrapper">
+  <div class="container">
+    <h2>Добавить новую категорию и характеристику товаров</h2><br>
+    <form action="/add_options" method="post" class="container-form">
+      <div th:name="options">
+        <input type="text" name="options" placeholder="Введите характеристику" class="input_edit">
+      </div>
+      <button type="submit" class="btn">Добавить</button>
+    </form>
+  </div>
+</div>
+</body>
+</html>
+

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <link rel="stylesheet" href="/main.css">
+    <title>Товары</title>
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+<div class="wrapper">
+    <div class="container">
+        <h2>Личный кабинет</h2>
+        <p th:text="'Ваше имя: ' + ${currentUser.getFirstName()}"></p>
+        <p th:text="'Ваша Фамилия: ' + ${currentUser.getLastName()}"></p>
+        <p th:text="'Электронный адрес: ' + ${currentUser.getEmail()}"></p>
+        <p th:text="'Общая cтоимость всех заказов: ' + ${totalPrice}"></p>
+        <br>
+        <h3>Ваши заказы</h3>
+        <div class="currentUserOrders">
+            <div th:each="order : ${currentUser.getOrder()}" class="orders">
+                <br>
+                <p th:text="'Id заказа: ' + ${order.getId()}"></p>
+                <p th:text="'Статус заказа: ' + ${order.getStatus()}"></p>
+                <p th:text="'Адрес доставки: ' + ${order.getAddress()}"></p>
+                <p th:text="'Дата заказа: ' + ${order.getOrderDate()}"></p>
+                <a th:href="'/admin/homePage/' + ${order.getId()} + '/details'" class="nav_edit">
+                    <button>Просмотреть заказ</button>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
+
+

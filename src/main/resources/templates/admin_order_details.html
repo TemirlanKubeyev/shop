@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" href="/main.css">
+  <title>Товары</title>
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+<div class="wrapper">
+  <div class="container">
+    <form>
+      <div class="products-in-order">
+        <h4>
+          <p th:text="'В заказе № ' + ${order.getId()} + ' следующие товары: '"></p>
+        </h4>
+        <div th:each="item : ${order_products}">
+          <p th:text="'Название товара: ' + ${item.getProduct().getName()}"></p>
+          <p th:text="'Цена товара: ' + ${item.getProduct().getPrice()}"></p>
+          <p th:text="'Количество товара: ' + ${item.getQuantityProducts()}"></p>
+        </div>
+          <p th:text="'Общая стоимость товаров: ' + ${totalCost}"></p>
+      </div>
+    </form>
+  </div>
+</div>
+</body>
+</html>
+
+
