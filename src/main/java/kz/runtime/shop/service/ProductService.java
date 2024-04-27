@@ -78,8 +78,10 @@ public class ProductService {
 
         int count = 0;
         for (Option option : options) {
-            if (!(option.getValue()==null)) {
-                option.getValue().setValue(values.get(count));
+            if (!(option.getValue().isEmpty())) {
+                for (Value value : option.getValue()) {
+                    value.setValue(values.get(count));
+                }
             }else {
                 Value value = new Value();
                 value.setProduct(product);
@@ -92,19 +94,22 @@ public class ProductService {
         productRepository.save(product);
     }
 
-    public List<String> getValues(List<Option> options) {
+    public List<String> getValues(List<Option> options, Product product) {
         List<String> values = new ArrayList<>();
         for (Option option : options) {
-            System.out.println(option.getValue());
-            if(option.getValue()==null){
+            if(option.getValue().isEmpty()){
                 values.add("нет значения");
             }else {
-                values.add(option.getValue().getValue());
+                for (Value value : option.getValue()) {
+                    System.out.println(value.getValue());
+                    if(value.getProduct() == product) {
+                        values.add(value.getValue());
+                    }
+                }
             }
         }
         return values;
     }
-
 
     public Product getProduct(Long id) {
         return productRepository.findById(id).orElseThrow();

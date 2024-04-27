@@ -1,5 +1,6 @@
 package kz.runtime.shop.repositories;
 
+import kz.runtime.shop.models.Option;
 import kz.runtime.shop.models.Product;
 import kz.runtime.shop.models.Value;
 import org.springframework.data.jpa.repository.JpaRepository;

@@ -96,7 +96,7 @@ public class ProductController {
         model.addAttribute("product", product);
         List<Option> options = product.getCategory().getOption();
         model.addAttribute("options", options);
-        List<String> values = productService.getValues(options);
+        List<String> values = productService.getValues(options, product);
         model.addAttribute("values", values);
         return "product_edit";
     }
@@ -151,7 +151,7 @@ public class ProductController {
         List<Option> options = product.getCategory().getOption();
         model.addAttribute("options", options);
         // передает все значения товара, с учетом null значения и заменяет на "нет значения".
-        List<String> values = productService.getValues(options);
+        List<String> values = productService.getValues(options, product);
         model.addAttribute("values", values);
 
         return "product_details";

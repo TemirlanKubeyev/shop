@@ -13,7 +13,7 @@ public class Value {
     @JoinColumn(name = "product_id")
     private Product product;
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "option_id")
     private Option option;
 

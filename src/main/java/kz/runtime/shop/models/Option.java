@@ -16,8 +16,8 @@ public class Option {
     @JoinColumn(name = "category_id")
     private Category category;
 
-    @OneToOne(mappedBy = "option")
-    private Value value;
+    @OneToMany(mappedBy = "option")
+    private List<Value> value;
 
     public Long getId() {
         return id;
@@ -43,11 +43,11 @@ public class Option {
         this.category = category;
     }
 
-    public Value getValue() {
+    public List<Value> getValue() {
         return value;
     }
 
-    public void setValue(Value value) {
+    public void setValue(List<Value> value) {
         this.value = value;
     }
 }
