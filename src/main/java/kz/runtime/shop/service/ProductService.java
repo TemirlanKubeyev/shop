@@ -7,9 +7,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 @Service
 public class ProductService {
@@ -78,35 +76,38 @@ public class ProductService {
 
         int count = 0;
         for (Option option : options) {
-            if (!(option.getValue().isEmpty())) {
-                for (Value value : option.getValue()) {
-                    value.setValue(values.get(count));
-                }
-            }else {
-                Value value = new Value();
-                value.setProduct(product);
-                value.setOption(option);
-                value.setValue(values.get(count));
-                valueRepository.save(value);
-            }
+            Value value = new Value();
+            value.setProduct(product);
+            value.setOption(option);
+            value.setValue(values.get(count));
+            valueRepository.save(value);
             count++;
         }
         productRepository.save(product);
     }
 
     public List<String> getValues(List<Option> options, Product product) {
-        List<String> values = new ArrayList<>();
+        HashMap<Long, String> optionValue = new HashMap<>();
+        // Записываем все значения как "нет значения"
         for (Option option : options) {
-            if(option.getValue().isEmpty()){
-                values.add("нет значения");
-            }else {
-                for (Value value : option.getValue()) {
-                    System.out.println(value.getValue());
-                    if(value.getProduct() == product) {
-                        values.add(value.getValue());
-                    }
+            optionValue.put(option.getId(), "Нет значения");
+        }
+        // Меняем значения по id продукта
+        for (Option option : options) {
+            for (Value value : option.getValue()) {
+                if (value.getProduct()==product){
+                   optionValue.put(option.getId(), value.getValue());
                 }
             }
+        }
+        // Сортируем KeySet по id Options
+        List<Long> sortedOptions = new ArrayList<>(optionValue.keySet());
+        Collections.sort(sortedOptions);
+
+        // добавляем в список значения отсортированного Options
+        List<String> values = new ArrayList<>();
+        for (Long sortedOption : sortedOptions) {
+            values.add(optionValue.get(sortedOption));
         }
         return values;
     }
