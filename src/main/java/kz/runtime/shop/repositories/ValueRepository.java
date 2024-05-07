@@ -10,4 +10,8 @@ import java.util.List;
 public interface ValueRepository extends JpaRepository<Value, Long> {
 
     List<Value> findAllByProduct(Product product);
+
+    Value findByOptionIdAndProduct(Long option, Product product);
+
+
 }

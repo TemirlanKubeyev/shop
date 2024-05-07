@@ -104,8 +104,9 @@ public class ProductController {
 
     @PostMapping("/products/{id}/edit")
     public String editProduct(@PathVariable (value= "id") Long id, @RequestParam String name,
-                              @RequestParam Integer price, @RequestParam(value = "values") List<String> values) {
-        productService.editProduct(id, name, price, values);
+                              @RequestParam Integer price, @RequestParam(value = "values") List<String> values,
+                              @RequestParam List<Long> options) {
+        productService.editProduct(id, name, price, values, options);
         return "redirect:/products/{id}/edit";
     }
 

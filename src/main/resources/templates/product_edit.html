@@ -16,6 +16,7 @@
       <input type="text" name="name" th:placeholder="'Название: ' + ${product.getName()}" class="input_edit"><br>
       <input type="text" name="price" th:placeholder="'Цена: ' + ${product.getPrice()}" class="input_edit"><br>
       <div th:each="opt, val : ${options}">
+        <input type="hidden" name="options" th:value="${opt.getId()}"/>
         <input type="text" th:name="values" th:placeholder="${opt.getOption()} + ': ' + ${values[val.index]}" class="input_edit">
       </div>
       <button type="submit" class="btn reset">Готово</button>

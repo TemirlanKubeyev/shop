@@ -23,7 +23,7 @@ public class ProductService {
     @Autowired
     private OrderProductRepository orderProductRepository;
     @Autowired
-    private OrderRepository orderRepository;
+    private OptionRepository optionRepository;
     @Autowired
     private ReviewRepository reviewRepository;
 
@@ -68,19 +68,24 @@ public class ProductService {
         return productRepository.findById(id).orElseThrow();
     }
 
-    public void editProduct(Long id, String name, Integer price, List<String> values) {
+    public void editProduct(Long id, String name, Integer price, List<String> values, List<Long> options) {
         Product product = productRepository.findById(id).orElseThrow();
         product.setName(name);
         product.setPrice(price);
-        List<Option> options = product.getCategory().getOption();
 
         int count = 0;
-        for (Option option : options) {
-            Value value = new Value();
-            value.setProduct(product);
-            value.setOption(option);
-            value.setValue(values.get(count));
-            valueRepository.save(value);
+        for (Long optionId : options) {
+            Value value = valueRepository.findByOptionIdAndProduct(optionId, product);
+            if (value!=null) {
+                value.setValue(values.get(count));
+            }else {
+                Value newValue = new Value();
+                newValue.setProduct(product);
+                Option option = optionRepository.findById(optionId).orElseThrow();
+                newValue.setOption(option);
+                newValue.setValue(values.get(count));
+                valueRepository.save(newValue);
+            }
             count++;
         }
         productRepository.save(product);
