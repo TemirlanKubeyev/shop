@@ -24,6 +24,19 @@
         <a href="/admin/homePage" class="icon basket-btn">
             <button class="btn nav_edit">Кабинет</button>
         </a>
+        <a href="/register_page" class="icon basket-btn">
+            <button class="btn nav_edit">Регистрация</button>
+        </a>
+        <div th:if="${#authorization.expr('!isAuthenticated()')}">
+            <a href="/login" class="icon basket-btn">
+                <button class="btn nav_edit">Войти</button>
+            </a>
+        </div>
+        <div th:if="${#authorization.expr('isAuthenticated()')}">
+            <a href="/logout" class="icon basket-btn">
+                <button class="btn nav_edit">Выйти</button>
+            </a>
+        </div>
     </div>
 </div>
 

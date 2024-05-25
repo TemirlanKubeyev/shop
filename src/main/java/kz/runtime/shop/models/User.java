@@ -1,6 +1,7 @@
 package kz.runtime.shop.models;
 
 import jakarta.persistence.*;
+import kz.runtime.shop.models.enumeration.UserRole;
 
 import java.util.List;
 
@@ -11,10 +12,12 @@ public class User {
     @GeneratedValue (strategy = GenerationType.IDENTITY)
     private Long id;
     private String firstName;
-
     private String lastName;
     private String email;
     private String password;
+
+    @Enumerated
+    private UserRole role;
 
     @OneToMany(mappedBy = "user")
     private List<Review> reviews;
@@ -87,5 +90,13 @@ public class User {
 
     public void setBasket(List<Basket> basket) {
         this.basket = basket;
+    }
+
+    public UserRole getRole() {
+        return role;
+    }
+
+    public void setRole(UserRole role) {
+        this.role = role;
     }
 }
