@@ -2,7 +2,7 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <link rel="stylesheet" href="/main.css">
+    <link rel="stylesheet" href="/css/main.css">
     <title>Товары</title>
 </head>
 <body>
@@ -18,15 +18,17 @@
                 <a th:href="'/products/' + ${el.getId()} + '/details'" class="nav_edit">
                     <button class="btn">Просмотреть</button>
                 </a>
-                <a th:href="'/products/' + ${el.getId()} + '/edit'" class="nav_edit">
-                    <button class="btn edit">Изменить</button>
-                </a>
-                <form th:action="'/products/' + ${el.getId()}" method="post">
-                    <button type="submit" class="btn del">Удалить</button>
-                </form>
-                <form th:action="'/products/' + ${el.getId()} + '/add_basket'" method="post">
-                    <button type="submit" class="btn">В корзину</button>
-                </form>
+                <div th:if="${#authorization.expr('isAuthenticated()')}" class="block-for-btn">
+                    <a th:href="'/products/' + ${el.getId()} + '/edit'" class="nav_edit">
+                        <button class="btn edit">Изменить</button>
+                    </a>
+                    <form th:action="'/products/' + ${el.getId()}" method="post">
+                        <button type="submit" class="btn del">Удалить</button>
+                    </form>
+                    <form th:action="'/products/' + ${el.getId()} + '/add_basket'" method="post">
+                        <button type="submit" class="btn">В корзину</button>
+                    </form>
+                </div>
             </div>
         </div>
         <br>

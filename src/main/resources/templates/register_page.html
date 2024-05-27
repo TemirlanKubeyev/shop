@@ -2,7 +2,7 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <link rel="stylesheet" href="/main.css">
+  <link rel="stylesheet" href="/css/main.css">
   <title>Товары</title>
 </head>
 <body>
@@ -11,15 +11,17 @@
   <div class="container">
     <form action="/register_page" method="post" class="register">
       <h2>Регистрация</h2>
-      <input type="text" name="first_name" class="input_edit" placeholder="Введите имя">
-      <input type="text" name="last_name" class="input_edit" placeholder="Введите фамилию">
-      <input type="text" name="email" class="input_edit" placeholder="Введите логин">
-      <input type="text" name="password" class="input_edit" placeholder="Придумайте пароль">
+      <input type="text" name="first_name" class="input_edit" placeholder="Введите имя" th:value="${first_name}">
+      <input type="text" name="last_name" class="input_edit" placeholder="Введите фамилию" th:value="${last_name}">
+      <input type="text" name="email" class="input_edit" placeholder="Введите логин" th:value="${email}">
+      <input type="text" name="password" class="input_edit" placeholder="Придумайте пароль" th:value="${password}">
       <button type="submit" class="regis">Зарегистрироваться</button>
     </form>
+  </div>
+  <div th:if="${errorMessage}" class="error_message">
+    <span>Ошибка регистрации, необходимо ввести уникальный логин либо заполнить все поля</span>
   </div>
 </div>
 </body>
 </html>
-
 

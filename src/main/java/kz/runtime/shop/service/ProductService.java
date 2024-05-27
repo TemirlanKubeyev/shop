@@ -44,23 +44,31 @@ public class ProductService {
         return pages;
     }
 
-    public void addProduct(String name, Integer price, Category category, List<String> values) {
-        Product product = new Product();
-        product.setCategory(category);
-        product.setName(name);
-        product.setPrice(price);
-        productRepository.save(product);
-
-        List<Option> options = product.getCategory().getOption();
-
-        int count = 0;
+    public boolean addProduct(String name, Integer price, Category category, List<String> values) {
         for (String value : values) {
-            Value newValue = new Value();
-            newValue.setValue(value);
-            newValue.setProduct(product);
-            newValue.setOption(options.get(count));
-            count++;
-            valueRepository.save(newValue);
+            if(value.isEmpty()) {
+                return false;
+            }
+        }
+        if (name.isEmpty() || price == null) {
+            return false;
+        }else {
+            Product product = new Product();
+            product.setCategory(category);
+            product.setName(name);
+            product.setPrice(price);
+            productRepository.save(product);
+            List<Option> options = product.getCategory().getOption();
+            int count = 0;
+            for (String value : values) {
+                Value newValue = new Value();
+                newValue.setValue(value);
+                newValue.setProduct(product);
+                newValue.setOption(options.get(count));
+                count++;
+                valueRepository.save(newValue);
+            }
+            return true;
         }
     }
 

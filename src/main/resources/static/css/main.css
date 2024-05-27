@@ -23,9 +23,10 @@ body {
 
 .header-block {
     display: flex;
-    width: 1000px;
+    flex-direction: row;
     align-items: center;
-    justify-content: end;
+    justify-content: center;
+    width: 1400px;
 }
 
 .wrapper {
@@ -216,4 +217,13 @@ p {
     margin-top: 10px;
 }
 
+.error_message {
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+}
 
+.message {
+    display: flex;
+    justify-content: start;
+}

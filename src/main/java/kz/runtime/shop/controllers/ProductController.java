@@ -16,8 +16,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 @Controller
@@ -36,6 +34,8 @@ public class ProductController {
 
     @Autowired
     private CategoryRepository categoryRepository;
+
+    private boolean message;
 
     @GetMapping("/products")
     public String getProducts(Model model, @RequestParam(required = false) int page) {
@@ -75,6 +75,7 @@ public class ProductController {
         List<Option> options = category.getOption();
         model.addAttribute("category", category);
         model.addAttribute("options", options);
+        model.addAttribute("message", message);
         return "add_products_with_characters";
     }
 
@@ -85,10 +86,14 @@ public class ProductController {
 
     @PostMapping("/add_products_with_chars")
     public String addProduct(@RequestParam Long category, @RequestParam String name,
-                             @RequestParam Integer price, @RequestParam List<String> values) {
+                             @RequestParam(required = false) Integer price, @RequestParam List<String> values) {
         Category category1 = categoryRepository.findById(category).orElseThrow();
-        productService.addProduct(name, price, category1, values);
-        return "redirect:info_page";
+        if (!(productService.addProduct(name, price, category1, values))) {
+            message = false;
+        }else {
+            message = true;
+        }
+        return "redirect:/add_products_with_chars?category="+category;
     }
 
     @GetMapping("/products/{id}/edit")

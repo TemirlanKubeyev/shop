@@ -2,7 +2,7 @@
 <html lang="ru" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-  <link rel="stylesheet" href="/main.css">
+  <link rel="stylesheet" href="/css/main.css">
   <title>Товары</title>
 </head>
 <body>
@@ -20,6 +20,12 @@
       <input type="number" name="price" placeholder="Цена товара" class="input_edit">
       <button type="submit" class="btn">Добавить</button>
     </form>
+  </div>
+  <div th:if="${message}" class="error_message message">
+    <span>Новый товар добавлен</span>
+  </div>
+  <div th:unless="${message}" class="error_message message">
+    <span>Ошибка добавления товара, необходимо заполнить все поля</span>
   </div>
 </div>
 </body>
