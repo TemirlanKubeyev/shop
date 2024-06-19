@@ -38,7 +38,7 @@ public class ProductController {
     private boolean message;
 
     @GetMapping("/products")
-    public String getProducts(Model model, @RequestParam(required = false) int page) {
+    public String getProducts(Model model, @RequestParam(name = "page", required = false, defaultValue = "1") int page) {
         Pageable pageable = productService.getPageable(page-1);
         Page<Product> productPage = productRepository.findAll(pageable);
         List<Product> products = productPage.getContent();
@@ -138,21 +138,6 @@ public class ProductController {
         List<Review> reviews = reviewService.getReviewsByProductAndPublished(product, true);
         model.addAttribute("average", average);
         model.addAttribute("reviews", reviews);
-
-        User user = userService.getCurrentUser(); // id = 3
-        boolean res = true;
-        if (user == null) {
-            res = false;
-            model.addAttribute("nullUser", true);
-        }
-
-        List<Review> rev = product.getReview(); // все отзывы товара
-        for (int i = 0; i < rev.size(); i++) {
-            if(rev.get(i).getUser().equals(user)){
-                res = false;
-            }
-        }
-        model.addAttribute("containsUser", res);
 
         // передает все характеристики товара
         List<Option> options = product.getCategory().getOption();

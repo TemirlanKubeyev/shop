@@ -9,37 +9,59 @@
 <header th:insert="blocks/header :: header"></header>
 <div class="wrapper">
   <div class="container">
-    <h2>Подробнее о товаре</h2>
+    <h2>Карточка товара</h2>
+    <br>
     <div th:each="el : ${product}" class="container-block">
-      <p th:text="'Id товара: ' + ${el.getId()}"></p>
-      <p th:text="'Категория товара: ' + ${el.getCategory().getName()}"></p>
-      <p th:text="'Название товара: ' + ${el.getName()}"></p>
-      <p th:text="'Цена товара: ' + ${el.getPrice()}"></p>
-        <div th:each="option, value : ${options}" class="inline-block">
-          <p th:text="${option.getOption()} + ': ' + ${values.get(value.index)}"></p>
+      <div class="product-info">
+        <div class="product-inf picture">
+          <img src="/images/amd_ryzen-7.jpg" alt="products-pic" class="picture">
         </div>
+        <div class="product-inf chars">
+        <!--<p th:text="'Id товара: ' + ${el.getId()}"></p>-->
+        <h2 th:text="${el.getName()}"></h2>
+          <p th:text="${el.getCategory().getName()}" class="category-text"></p>
+          <span class="char-head">Характеристики</span>
+          <br>
+          <div th:each="option, value : ${options}" class="inline-block">
+            <p th:text="${option.getOption()}+': '" class="char-text"></p>
+            <p th:text="${values.get(value.index)}" class="char-text"></p>
+          </div>
+        </div>
+        <div class="product-inf price">
+          <p th:text="${el.getPrice()}"></p>&nbsp;<span>&#8376;</span>
+        </div>
+      </div>
       <br>
       <h3>Отзывы</h3>
       <p th:text="'средняя оценка товара: ' + ${average}" class="bold-text"></p>
       <br>
-      <div th:each="review : ${reviews}" class="container-block">
-        <p th:text="${review.getUser().getFirstName()} + ' ' + ${review.getUser().getLastName()}" class="user"></p>
-        <p th:text="'оценка (от 1 до 5): ' + ${review.getScore()}" class="bold-text"></p>
-        <p th:text="${review.getText()}" class="review-text"></p>
+      <div class="review-box">
+        <div th:if="${#authorization.expr('isAuthenticated()')}">
+          <span class="review-had">Оставьте отзыв</span>
+          <form method="post" class="form-textarea">
+            <textarea name="text" class="review-input-text" placeholder="Напишите отзыв здесь"></textarea>
+            <img src="/images/starts.svg" class="image-stars">
+            <input type="text" name="score" class="review-score">
+            <button type="submit" class="product-btn">Оставить отзыв</button><br>
+          </form>
+        </div>
+        <div th:if="${#authorization.expr('!isAuthenticated()')}">
+          <span class="review-had">Чтобы оставить отзыв о товаре, Вам необходимо авторизоваться!!!</span>
+        </div>
       </div>
-    </div>
-    <br>
-    <div th:if="${containsUser}">
-      <h2>Добавить отзыв к товару</h2>
-      <form method="post">
-        <input type="text" name="text" placeholder="текст отзыва">
-        <input type="text" name="score" placeholder="оценка (от 1 до 5)">
-        <button type="submit" class="btn">Оставить отзыв</button>
-      </form>
-      <br><br>
-    </div>
-    <div th:if="${nullUser}">
-      <span>Чтобы оставить отзыв о товаре, Вам необходимо авторизоваться!!!</span>
+      <div class="review-second-box">
+        <div th:each="review : ${reviews}" class="review-block">
+          <div class="review-user">
+            <img src="/images/review-user.svg" alt="user" class="review-user-pic">
+            <div class="review-user-point">
+              <p th:text="${review.getUser().getFirstName()} + ' '
+              + ${review.getUser().getLastName()}" class="user"></p>
+              <p th:text="${review.getScore()}" class="bold-text"></p>
+            </div>
+          </div>
+          <p th:text="${review.getText()}" class="review-text"></p>
+        </div>
+      </div>
     </div>
   </div>
 </div>

@@ -7,39 +7,47 @@
 </head>
 <body>
 <header th:insert="blocks/header :: header"></header>
-<div class="wrapper">
+<div class="wrapper product-page">
     <div class="container block">
         <h2>Все товары</h2>
-        <div th:each="el : ${products}" class="container-block">
-            <p th:text="'Id товара: ' + ${el.getId()}"></p>
-            <p th:text="'Название товара: ' + ${el.getName()}"></p>
-            <p th:text="'Цена товара: ' + ${el.getPrice()}"></p>
-            <div class="block-for-btn">
-                <a th:href="'/products/' + ${el.getId()} + '/details'" class="nav_edit">
-                    <button class="btn">Просмотреть</button>
-                </a>
-                <div th:if="${#authorization.expr('isAuthenticated()')}" class="block-for-btn">
-                    <a th:href="'/products/' + ${el.getId()} + '/edit'" class="nav_edit">
-                        <button class="btn edit">Изменить</button>
+        <div class="product-container">
+            <div th:each="el : ${products}" class="product-box">
+                <div>
+                    <div class="product-box-pic">
+                        <img src="/images/amd_ryzen-7.jpg" alt="products-pic" class="pic">
+                    </div>
+                    <!--<p th:text="'Id товара: ' + ${el.getId()}"></p>-->
+                    <h3 th:text="${el.getName()}"></h3>
+                    <div class="product-box-price">
+                        <p th:text="${el.getPrice()}"></p><span class="sing-tenge">&#8376;</span>
+                    </div>
+                </div>
+                <div class="block-for-btn">
+                    <a th:href="'/products/' + ${el.getId()} + '/details'" class="nav_edit">
+                        <button class="product-btn">Просмотреть</button>
                     </a>
-                    <form th:action="'/products/' + ${el.getId()}" method="post">
-                        <button type="submit" class="btn del">Удалить</button>
-                    </form>
-                    <form th:action="'/products/' + ${el.getId()} + '/add_basket'" method="post">
-                        <button type="submit" class="btn">В корзину</button>
-                    </form>
+                    <div th:if="${#authorization.expr('hasRole(''admin'')')}" class="block-for-btn">
+                        <a th:href="'/products/' + ${el.getId()} + '/edit'" class="nav_edit">
+                            <button class="product-btn">Изменить</button>
+                        </a>
+                        <form th:action="'/products/' + ${el.getId()}" method="post">
+                            <button type="submit" class="product-btn">Удалить</button>
+                        </form>
+                    </div>
+                    <div th:if="${#authorization.expr('isAuthenticated()')}">
+                        <form th:action="'/products/' + ${el.getId()} + '/add_basket'" method="post">
+                            <button type="submit" class="product-btn">В корзину</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
-        <br>
-        <p th:text="'Текущяя страница: ' + ${currentPage}"></p>
-        <br>
-        <form action="/products" method="get" class="pages-form">
-            <div th:each="el : ${allPages}">
-                <button th:name="page" th:text="${el}" th:value="${el}" th:class="${activePage==el} ? activePage : pages"></button>
-            </div>
-        </form>
     </div>
+    <form action="/products" method="get" class="pages-form">
+        <div th:each="el : ${allPages}">
+            <button th:name="page" th:text="${el}" th:value="${el}" th:class="${activePage==el} ? activePage : pages"></button>
+        </div>
+    </form>
 </div>
 </body>
 </html>

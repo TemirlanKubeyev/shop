@@ -9,22 +9,32 @@
 <header th:insert="blocks/header :: header"></header>
 <div class="wrapper">
     <div class="container">
-        <h2>Личный кабинет</h2>
-        <p th:text="'Ваше имя: ' + ${currentUser.getFirstName()}"></p>
-        <p th:text="'Ваша Фамилия: ' + ${currentUser.getLastName()}"></p>
-        <p th:text="'Электронный адрес: ' + ${currentUser.getEmail()}"></p>
-        <p th:text="'Общая cтоимость всех заказов: ' + ${totalPrice}"></p>
+        <h2 class="profile">Ваш профиль</h2><br>
+        <div class="user-photo">
+            <div class="add_photo">
+                <img th:src="@{${userPhoto}}" class="user-photo-photo">
+                <form action="/admin/homePage" method="post" enctype="multipart/form-data">
+                    <input type="file" name="photo">
+                    <button type="submit">Готово</button>
+                </form>
+            </div>
+            <div class="user-info">
+                <p th:text="'Имя: ' + ${currentUser.getLastName()}" class="user-info-text"></p>
+                <p th:text="'Фамилия: ' + ${currentUser.getFirstName()}" class="user-info-text"></p>
+                <p th:text="'Логин: ' + ${currentUser.getEmail()}" class="user-info-text"></p>
+            </div>
+        </div>
         <br>
-        <h3>Ваши заказы</h3>
-        <div class="currentUserOrders">
+        <h2>Ваши заказы</h2><br>
+        <div class="current_user_orders">
+            <p th:text="'Общая cтоимость всех заказов: ' + ${totalPrice}"></p>
             <div th:each="order : ${currentUser.getOrder()}" class="orders">
-                <br>
-                <p th:text="'Id заказа: ' + ${order.getId()}"></p>
-                <p th:text="'Статус заказа: ' + ${order.getStatus()}"></p>
-                <p th:text="'Адрес доставки: ' + ${order.getAddress()}"></p>
-                <p th:text="'Дата заказа: ' + ${order.getOrderDate()}"></p>
+                <p th:text="'Id заказа: ' + ${order.getId()}" class="order-user-text"></p>
+                <p th:text="'Статус заказа: ' + ${order.getStatus()}" class="order-user-text"></p>
+                <p th:text="'Адрес доставки: ' + ${order.getAddress()}" class="order-user-text"></p>
+                <p th:text="'Дата заказа: ' + ${order.getOrderDate()}" class="order-user-text"></p><br>
                 <a th:href="'/admin/homePage/' + ${order.getId()} + '/details'" class="nav_edit">
-                    <button>Просмотреть заказ</button>
+                    <button class="product-btn">Просмотреть заказ</button>
                 </a>
             </div>
         </div>

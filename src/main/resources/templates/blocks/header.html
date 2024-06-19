@@ -1,41 +1,63 @@
 <div th:fragment="header" class="header">
     <div class="header-block">
-        <a href="/categories" class="icon category-btn">
-            <button class="btn nav_edit category-icon">Добавить категорию</button>
-        </a>
-        <a href="/add_products" class="icon category-btn">
-            <button class="btn nav_edit category-icon">Добавить товар</button>
-        </a>
-        <a href="/products?page=1" class="icon basket-btn">
-            <button class="btn nav_edit">Все товары</button>
-        </a>
-        <a href="/basket" class="icon basket-btn">
-            <button class="btn nav_edit">Корзина</button>
-        </a>
-        <a href="/orders" class="icon basket-btn">
-            <button class="btn nav_edit">Заказы</button>
-        </a>
-        <a href="/admin/reviews" class="icon basket-btn">
-            <button class="btn nav_edit">Все Отзывы</button>
-        </a>
-        <a href="/admin/orders" class="icon basket-btn">
-            <button class="btn nav_edit">Все Заказы</button>
-        </a>
-        <a href="/admin/homePage" class="icon basket-btn">
-            <button class="btn nav_edit">Кабинет</button>
-        </a>
-        <a href="/register_page" class="icon basket-btn">
-            <button class="btn nav_edit">Регистрация</button>
-        </a>
-        <div th:if="${#authorization.expr('!isAuthenticated()')}">
-            <a href="/login" class="icon basket-btn">
-                <button class="btn nav_edit">Войти</button>
+        <img src="/images/logo.jpg" alt="logo" class="logo">
+        <div class="header-block-second">
+            <div th:if="${#authorization.expr('hasRole(''admin'')')}">
+                <a href="/categories" class="main-links">
+                    <img src="/images/admin.svg" class="main-image">
+                    <span>Добавить категорию</span>
+                </a>
+            </div>
+            <div th:if="${#authorization.expr('hasRole(''admin'')')}">
+                <a href="/add_products" class="main-links">
+                    <img src="/images/admin.svg" class="main-image">
+                    <span>Добавить товар</span>
+                </a>
+            </div>
+            <div th:if="${#authorization.expr('hasRole(''admin'')')}">
+                <a href="/admin/reviews" class="main-links">
+                    <img src="/images/admin.svg" class="main-image">
+                    <span>Все Отзывы</span>
+                </a>
+            </div>
+            <div th:if="${#authorization.expr('hasRole(''admin'')')}">
+                <a href="/admin/orders" class="main-links">
+                    <img src="/images/admin.svg" class="main-image">
+                    <span>Все Заказы</span>
+                </a>
+            </div>
+            <a href="/products" class="main-links">
+                <img src="/images/products.svg" class="main-image">
+                <span>Все товары</span>
             </a>
-        </div>
-        <div th:if="${#authorization.expr('isAuthenticated()')}">
-            <a href="/logout" class="icon basket-btn">
-                <button class="btn nav_edit">Выйти</button>
+            <a href="/basket" class="main-links">
+                <img src="/images/basket.svg" class="main-image">
+                <span>Корзина</span>
             </a>
+            <a href="/orders" class="main-links">
+                <img src="/images/orders.svg" class="main-image">
+                <span>Заказы</span>
+            </a>
+            <a href="/admin/homePage" class="main-links">
+                <img src="/images/profile.svg" class="main-image">
+                <span>Профиль</span>
+            </a>
+            <a href="/register_page" class="main-links">
+                <img src="/images/register.svg" class="main-image">
+                <span>Регистрация</span>
+            </a>
+            <div th:if="${#authorization.expr('!isAuthenticated()')}">
+                <a href="/login" class="main-links">
+                    <img src="/images/logout.svg" class="main-image">
+                    <span>Войти</span>
+                </a>
+            </div>
+            <div th:if="${#authorization.expr('isAuthenticated()')}">
+                <a href="/logout" class="main-links">
+                    <img src="/images/logout.svg" class="main-image">
+                    <span>Выйти</span>
+                </a>
+            </div>
         </div>
     </div>
 </div>

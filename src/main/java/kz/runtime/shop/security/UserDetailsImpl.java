@@ -1,6 +1,7 @@
 package kz.runtime.shop.security;
 import kz.runtime.shop.models.User;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import java.util.Collection;
 import java.util.List;
@@ -15,7 +16,12 @@ public class UserDetailsImpl implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of();
+        // GrantedAuthority - объект представляющий собой роль/привилегию в приложении.
+        // GrantedAuthority -> authority (String) -> роль всегда должна начинаться в ROLE_.
+        String roleName = user.getRole().name().toLowerCase();
+        String authorityName = "ROLE_" + roleName;
+        GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(authorityName);
+        return List.of(grantedAuthority);
     }
 
     @Override

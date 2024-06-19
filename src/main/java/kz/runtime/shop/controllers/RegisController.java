@@ -26,6 +26,11 @@ public class RegisController {
         return "register_page";
     }
 
+    @GetMapping("/register_page/info_page")
+    public String getInfoPageRegister() {
+        return "info_page_register";
+    }
+
     @PostMapping("/register_page")
     public String addUser(@RequestParam String first_name, @RequestParam String last_name,
                           @RequestParam String email, @RequestParam String password,
@@ -39,7 +44,7 @@ public class RegisController {
         } else {
             errorMessage = false;
         }
-        return "redirect:/register_page";
+        return "redirect:/register_page/info_page";
 
     }
 }

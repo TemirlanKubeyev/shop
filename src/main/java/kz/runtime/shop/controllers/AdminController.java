@@ -7,6 +7,7 @@ import kz.runtime.shop.models.User;
 import kz.runtime.shop.models.enumeration.OrderStatus;
 import kz.runtime.shop.repositories.OrderProductRepository;
 import kz.runtime.shop.repositories.OrderRepository;
+import kz.runtime.shop.repositories.UserRepository;
 import kz.runtime.shop.service.AdminService;
 import kz.runtime.shop.service.OrderService;
 import kz.runtime.shop.service.UserService;
@@ -17,7 +18,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 @Controller
@@ -37,6 +44,9 @@ public class AdminController {
 
     @Autowired
     private OrderRepository orderRepository;
+
+    @Autowired
+    private UserRepository userRepository;
 
     @GetMapping("/admin/reviews")
     public String getAllReviews(Model model) {
@@ -82,7 +92,25 @@ public class AdminController {
         model.addAttribute("orders", orders);
         int totalPrice = orderService.getTotalPriceAllOrders();
         model.addAttribute("totalPrice", totalPrice);
+        String userPhoto = userService.getCurrentUser().getPhotoPath();
+        model.addAttribute("userPhoto", userPhoto);
         return "admin_page";
+    }
+
+    @PostMapping("/admin/homePage")
+    public String setAdminPage(@RequestParam (name = "photo") MultipartFile photo) throws Exception {
+        String directoryName = "photos/";
+
+        Path pathPrevPhoto = Path.of("src/main/resources/static"+userService.getCurrentUser().getPhotoPath());
+        adminService.deletePhotoFromDirectory(pathPrevPhoto);
+
+        String path = adminService.createDirectoryPhotos(photo, directoryName);
+
+        if (!(path.equals("EmptyFile"))) {
+            adminService.savePathPhoto(path);
+        }
+
+        return "redirect:/admin/homePage";
     }
 
     @GetMapping("/admin/homePage/{id}/details")

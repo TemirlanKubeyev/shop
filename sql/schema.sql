@@ -49,8 +49,9 @@ create table users
     primary key (id)
 );
 
+
 alter table users
-drop column role;
+drop column photo;
 
 alter table users
 add column role int2;

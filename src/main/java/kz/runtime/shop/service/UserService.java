@@ -20,4 +20,8 @@ public class UserService {
         String name = authentication.getName();
         return userRepository.findByEmail(name);
     }
+
+
+
+
 }

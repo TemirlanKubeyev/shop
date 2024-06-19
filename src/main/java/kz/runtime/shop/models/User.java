@@ -16,6 +16,9 @@ public class User {
     private String email;
     private String password;
 
+    // user-photo
+    private String photoPath;
+
     @Enumerated
     private UserRole role;
 
@@ -98,5 +101,13 @@ public class User {
 
     public void setRole(UserRole role) {
         this.role = role;
+    }
+
+    public String getPhotoPath() {
+        return photoPath;
+    }
+
+    public void setPhotoPath(String photo) {
+        this.photoPath = photo;
     }
 }
