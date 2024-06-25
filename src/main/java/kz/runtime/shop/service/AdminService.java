@@ -70,7 +70,7 @@ public class AdminService {
         orderRepository.save(order);
     }
 
-    public void savePathPhoto(String path) throws IOException {
+    public void savePathPhoto(String path) {
         Long id = userService.getCurrentUser().getId();
         User user = userRepository.findById(id).orElseThrow();
         user.setPhotoPath(path);

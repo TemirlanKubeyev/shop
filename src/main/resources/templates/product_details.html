@@ -14,11 +14,11 @@
     <div th:each="el : ${product}" class="container-block">
       <div class="product-info">
         <div class="product-inf picture">
-          <img src="/images/amd_ryzen-7.jpg" alt="products-pic" class="picture">
+          <img th:src="@{${el.getPhoto()}}" class="picture">
         </div>
         <div class="product-inf chars">
-        <!--<p th:text="'Id товара: ' + ${el.getId()}"></p>-->
-        <h2 th:text="${el.getName()}"></h2>
+          <br>
+          <h2 th:text="${el.getName()}"></h2>
           <p th:text="${el.getCategory().getName()}" class="category-text"></p>
           <span class="char-head">Характеристики</span>
           <br>

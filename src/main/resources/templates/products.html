@@ -12,32 +12,35 @@
         <h2>Все товары</h2>
         <div class="product-container">
             <div th:each="el : ${products}" class="product-box">
-                <div>
+                <div class="picture-name">
                     <div class="product-box-pic">
-                        <img src="/images/amd_ryzen-7.jpg" alt="products-pic" class="pic">
+                        <img th:src="@{${el.getPhoto()}}" class="pic">
                     </div>
-                    <!--<p th:text="'Id товара: ' + ${el.getId()}"></p>-->
-                    <h3 th:text="${el.getName()}"></h3>
-                    <div class="product-box-price">
-                        <p th:text="${el.getPrice()}"></p><span class="sing-tenge">&#8376;</span>
-                    </div>
-                </div>
-                <div class="block-for-btn">
-                    <a th:href="'/products/' + ${el.getId()} + '/details'" class="nav_edit">
-                        <button class="product-btn">Просмотреть</button>
+                    <a th:href="'/products/' + ${el.getId()} + '/details'" class="product-name-link">
+                        <span th:text="${el.getName()}" class="product-name"></span>
                     </a>
-                    <div th:if="${#authorization.expr('hasRole(''admin'')')}" class="block-for-btn">
-                        <a th:href="'/products/' + ${el.getId()} + '/edit'" class="nav_edit">
-                            <button class="product-btn">Изменить</button>
-                        </a>
-                        <form th:action="'/products/' + ${el.getId()}" method="post">
-                            <button type="submit" class="product-btn">Удалить</button>
-                        </form>
-                    </div>
-                    <div th:if="${#authorization.expr('isAuthenticated()')}">
-                        <form th:action="'/products/' + ${el.getId()} + '/add_basket'" method="post">
-                            <button type="submit" class="product-btn">В корзину</button>
-                        </form>
+                </div>
+                <div class="btn-container">
+                    <div class="block-for-btn">
+                        <p th:text="${el.getPrice()} + ' тг.'" class="product-box-price"></p>
+                        <div th:if="${#authorization.expr('hasRole(''admin'')')}" class="block-for-btn">
+                            <a th:href="'/products/' + ${el.getId()} + '/edit'" class="nav_edit">
+                                <button class="product-btn">Изменить</button>
+                            </a>
+                            <form th:action="'/products/' + ${el.getId()}" method="post">
+                                <button type="submit" class="product-btn">Удалить</button>
+                            </form>
+                            <a th:href="'/products/'+ ${el.getId()} +'/edit_photo'">
+                                <button type="submit" class="product-btn">Изменить картинку</button>
+                            </a>
+                        </div>
+                        <div th:if="${#authorization.expr('isAuthenticated()')}">
+                            <form th:action="'/products/' + ${el.getId()} + '/add_basket'" method="post">
+                                <button type="submit" class="btn-buy-now">
+                                    <img src="/images/buy.png">&nbsp;<span>В корзину</span>
+                                </button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

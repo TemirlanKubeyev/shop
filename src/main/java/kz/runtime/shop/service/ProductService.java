@@ -6,7 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+import java.text.DecimalFormat;
 import java.util.*;
 
 @Service
@@ -28,7 +35,7 @@ public class ProductService {
     private ReviewRepository reviewRepository;
 
     public Pageable getPageable(int page) {
-        Pageable pageable = PageRequest.of(page, 2);
+        Pageable pageable = PageRequest.of(page, 12);
         return pageable;
     }
 
@@ -158,8 +165,40 @@ public class ProductService {
         }else {
             return false;
         }
-
     }
+
+    public String createDirectoryPhotos(MultipartFile photo, String directoryName) throws Exception {
+        String staticPath = "src/main/resources/static/";
+        String dirPath = staticPath+directoryName;
+        Path path = Paths.get(dirPath);
+        if (!Files.exists(path)) {
+            Files.createDirectories(path);
+        }
+        // создаем уникальное название файла
+        String fileName = System.currentTimeMillis() + "_" + photo.getOriginalFilename();
+        // сохранение пути файла
+        Path filePath = path.resolve(fileName);
+        // считывание поток байтов файла, сохранение файла в указанный путь и
+        // перезапись если имеется похожий файл
+        if (!(photo.isEmpty())) {
+            Files.copy(photo.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
+            String pathPhoto = "/" + directoryName + fileName;
+            return pathPhoto;
+        }else {
+            return "EmptyFile";
+        }
+    }
+
+    public void savePathPhoto(String path, Long productId) {
+        Product product = productRepository.findById(productId).orElseThrow();
+        product.setPhoto(path);
+        productRepository.save(product);
+    }
+
+    public void deletePhotoFromDirectory(Path pathPrevPhoto) throws IOException {
+        Files.deleteIfExists(pathPrevPhoto);
+    }
+
 }
 
 

@@ -15,7 +15,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.lang.constant.Constable;
+import java.nio.file.Path;
 import java.util.List;
 
 @Controller
@@ -149,7 +152,31 @@ public class ProductController {
         return "product_details";
     }
 
+    @GetMapping("/products/{id}/edit_photo")
+    public String editProductPhoto(@PathVariable (value = "id") Long id, Model model) {
+        Product product = productRepository.findById(id).orElseThrow();
+        model.addAttribute("product", product);
+        return "product_photo_edit";
+    }
+
+    @PostMapping("/products/{id}/edit_photo")
+    public String editProductPhoto (@PathVariable (value= "id") Long id, @RequestParam (name = "photo") MultipartFile photo) throws Exception {
+        String directory = "photos/";
+        String path = productService.createDirectoryPhotos(photo, directory);
+        String productPhotoPath = productRepository.findById(id).orElseThrow().getPhoto();
+
+        if(!(productPhotoPath == null)) {
+            Path pathPrevPhoto = Path.of("src/main/resources/static" + productPhotoPath);
+            productService.deletePhotoFromDirectory(pathPrevPhoto);
+        }
+
+        if (!(path.equals("EmptyFile"))) {
+            productService.savePathPhoto(path, id);
+        }
+
+        return "redirect:/products/{id}/edit_photo";
+    }
+
 
 }
-
 

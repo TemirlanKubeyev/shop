@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" href="/css/main.css">
+  <title>Товары</title>
+</head>
+<body>
+<header th:insert="blocks/header :: header"></header>
+<div class="wrapper">
+  <div class="container">
+    <h2>Изменить картинку товара</h2>
+    <br>
+    <div class="picture-name edit">
+      <div class="product-box-pic">
+        <img th:src="@{${product.getPhoto()}}" class="pic">
+      </div>
+      <span th:text="${product.getName()}" class="product-name"></span>
+      <p th:text="${product.getPrice()} + ' тг.'" class="product-box-price"></p>
+    </div>
+    <form th:action="'/products/'+${product.getId()}+'/edit_photo'" method="post" enctype="multipart/form-data" class="photo-edit">
+      <br>
+      <input type="file" name="photo">
+      <button type="submit" class="btn-done">Готово</button>
+    </form>
+  </div>
+</div>
+</body>
+</html>
+
