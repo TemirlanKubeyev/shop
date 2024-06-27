@@ -10,32 +10,52 @@
 <div class="wrapper">
     <div class="container">
         <h2>Корзина</h2>
-        <div th:if="${baskets}" class="total_cost">
-            <p th:text="'Общая стоимость всех товаров в корзине: ' + ${total_cost}"></p>
-        </div>
+        <br><br>
         <div th:each="el : ${baskets}" class="container-block">
-            <p th:text="'Пользователь: ' + ${el.getUser().getFirstName()} + ${el.getUser().getLastName()}"></p>
-            <p th:text="'Название товара: ' + ${el.getProduct().getName()}"></p>
-            <p th:text="'Категория товара: ' + ${el.getProduct().getCategory().getName()}"></p>
-            <p th:text="'Цена товара: ' + ${el.getProduct().getPrice()}"></p>
+            <div class="picture-product-info">
+                <div class="product-basket-pic">
+                    <img th:src="@{${el.getProduct().getPhoto()}}">
+                </div>
+                <div class="product-info-text">
+                    <p th:text="${el.getProduct().getName()}"></p>
+                    <br>
+                    <p th:text="${el.getProduct().getPrice()}+' тг.'" class="price-basket"></p>
+                </div>
+            </div>
             <div class="method">
-                <form th:action="'/basket/' + ${el.getId()} + '/decrease'"  method="post">
-                    <button type="submit" class="count min">-</button>
+                <form th:action="'/basket/' + ${el.getId()} + '/decrease'"  method="post" class="form-inc-dec">
+                    <button type="submit" class="count min">
+                        <img src="/images/minus.svg" class="img-minus-plus">
+                    </button>
                 </form>
                 <span th:text="${el.getQuantity()}" class="txt"></span>
-                <form th:action="'/basket/' + ${el.getId()} + '/increase'"  method="post">
-                    <button type="submit" class="count plus">+</button>
+                <form th:action="'/basket/' + ${el.getId()} + '/increase'"  method="post" class="form-inc-dec">
+                    <button type="submit" class="count plus">
+                        <img src="/images/plus.svg" class="img-minus-plus">
+                    </button>
+                </form>
+                <form th:action="'/basket/' + ${el.getId()} + '/delete'" method="post" class="form-inc-dec">
+                    <button type="submit" class="btn-del">
+                        <img src="/images/delete.svg">
+                    </button>
                 </form>
             </div>
-            <form th:action="'/basket/' + ${el.getId()} + '/delete'" method="post">
-                <button type="submit" class="btn del">Удалить</button>
-            </form>
         </div>
-        <div th:if="${baskets}" class="add_order_products">
-            <form action="/basket/add_to_order_product" method="post">
-                <input name="address" placeholder="введите адрес" class="nav_edit">
-                <button type="submit">добавить в заказ</button>
-            </form>
+        <div class="total-cost-order-container">
+            <div th:if="${baskets}" class="total_cost">
+                <p th:text="'Сумма к оплате ' + ${total_cost} + ' тг.'"></p>
+            </div>
+            <div th:if="${baskets}" class="order-icon-container">
+                <form action="/basket/add_to_order_product" method="post" class="add_order_products">
+                    <input name="address" placeholder="Введите адрес доставки" class="nav_edit_address">
+                    <button type="submit" class="check_out">
+                        <img src="/images/check_out.svg">
+                    </button>
+                </form>
+                <div class="order-text">
+                    <span>Оформить заказ</span>
+                </div>
+            </div>
         </div>
     </div>
 </div>

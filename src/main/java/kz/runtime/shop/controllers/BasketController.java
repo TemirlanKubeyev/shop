@@ -23,7 +23,7 @@ public class BasketController {
     private UserService userService;
     @GetMapping("/basket")
     public String getBasketDetails(Model model) {
-        int total = basketService.getTotalPrice();
+        double total = basketService.getTotalPrice();
         model.addAttribute("total_cost", total);
         User user = userService.getCurrentUser();
         List<Basket> baskets = basketService.getAllProductsInBasket(user);

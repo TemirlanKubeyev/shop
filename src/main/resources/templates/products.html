@@ -25,19 +25,25 @@
                         <p th:text="${el.getPrice()} + ' тг.'" class="product-box-price"></p>
                         <div th:if="${#authorization.expr('hasRole(''admin'')')}" class="block-for-btn">
                             <a th:href="'/products/' + ${el.getId()} + '/edit'" class="nav_edit">
-                                <button class="product-btn">Изменить</button>
+                                <button class="btn-buy-now">
+                                    <img src="/images/edit.svg">&nbsp;<span>Изменить</span>
+                                </button>
                             </a>
                             <form th:action="'/products/' + ${el.getId()}" method="post">
-                                <button type="submit" class="product-btn">Удалить</button>
+                                <button type="submit" class="btn-buy-now">
+                                    <img src="/images/delete.svg">&nbsp;<span>Удалить</span>
+                                </button>
                             </form>
-                            <a th:href="'/products/'+ ${el.getId()} +'/edit_photo'">
-                                <button type="submit" class="product-btn">Изменить картинку</button>
+                            <a th:href="'/products/'+ ${el.getId()} +'/edit_photo'" class="nav_edit">
+                                <button type="submit" class="btn-buy-now">
+                                    <img src="/images/edit-image.svg">&nbsp;<span>Изменить картинку</span>
+                                </button>
                             </a>
                         </div>
                         <div th:if="${#authorization.expr('isAuthenticated()')}">
                             <form th:action="'/products/' + ${el.getId()} + '/add_basket'" method="post">
                                 <button type="submit" class="btn-buy-now">
-                                    <img src="/images/buy.png">&nbsp;<span>В корзину</span>
+                                    <img src="/images/basket.svg">&nbsp;<span>В корзину</span>
                                 </button>
                             </form>
                         </div>
@@ -52,6 +58,7 @@
         </div>
     </form>
 </div>
+<footer th:insert="blocks/footer :: footer"></footer>
 </body>
 </html>
 
