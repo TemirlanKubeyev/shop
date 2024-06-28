@@ -618,37 +618,87 @@ body {
 .check_out {
     border: none;
     background: none;
-    transition-duration: 0.2s;
+    transition-duration: 0.9s;
     cursor: pointer;
 }
 
-.check_out:hover .order-text {
+.check_out:hover + .order-text {
     transform: scale(1.1);
-    transition-duration: 0.2s;
+    transition-duration: 0.9s;
     visibility: visible;
 }
 
 .check_out img {
     width: 35px;
     height: 35px;
-    margin-left: 10px;
 }
 
 .nav_edit_address {
     width: 240px;
     height: 25px;
+    margin-right: 10px;
 }
 
-.order-icon-container {
+.add_order_products {
     position: relative;
 }
 
 .order-text {
     position: absolute;
-    top: -20px;
+    top: -30px;
     right: 0;
     font-size: 17px;
     font-weight: 500;
     visibility: hidden;
+    border-radius: 5px;
+    background: gainsboro;
+    padding: 5px;
 }
 
+.orders-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.orders-container-info {
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+}
+
+.products-name-price {
+    color: black;
+}
+
+.orders-container-info-text {
+    color: dimgrey;
+    margin-bottom: 5px;
+}
+
+.orders {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+    border-top: solid 1px #454545;
+    border-bottom: solid 1px #454545;
+    padding: 10px 0;
+}
+
+.products-order {
+    display: flex;
+    justify-content: space-between;
+    color: dimgrey;
+}
+
+.list-order-text {
+    margin-bottom: 5px;
+}
+
+.list-order-text {
+    color: dimgrey;
+}
+
+.blue-text {
+    color: mediumblue;
+}

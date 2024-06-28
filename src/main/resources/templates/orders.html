@@ -9,27 +9,47 @@
 <header th:insert="blocks/header :: header"></header>
 <div class="wrapper">
     <div class="container">
-        <h2>Заказы</h2>
+        <h2>История заказов</h2>
         <br>
-        <div th:each="el : ${orders}">
-            <h4>
-                <p th:text="'Заказ №: ' + ${el.getId()}"></p>
-            </h4>
-            <p th:text="'Дата заказа: ' + ${el.getOrderDate()}"></p>
-            <p th:text="'Адрес доставки: ' + ${el.getAddress()}"></p>
-            <p th:text="'Пользватель: ' + ${el.getUser().getFirstName() + ' ' + el.getUser().getLastName()}"></p>
-            <p th:text="'Статус заказа: ' + ${el.getStatus()}"></p>
-            <div class="products-in-order">
-                <h4>
-                    <p th:text="'В заказе № ' + ${el.getId()} + ' следующие товары: '"></p>
-                </h4>
-                <div th:each="item : ${order_products}">
-                    <p th:text="'Название товара: ' + ${item.getProduct().getName()}"></p>
-                    <p th:text="'Название товара: ' + ${item.getProduct().getPrice()}"></p>
-                    <p th:text="'Количество товара: ' + ${item.getQuantityProducts()}"></p>
+        <div th:each="el : ${orders}" class="orders">
+            <div class="orders-container">
+                <div class="orders-container-info">
+                    <p th:text="'Заказ №: ' + ${el.getId()}" class="orders-container-info-text"></p>
+                    <p th:text="'cтатус: ' + ${el.getStatus()}" class="blue-text"></p>
+                </div>
+                <div class="orders-container-info">
+                    <p class="orders-container-info-text">Дата создания</p>
+                    <p th:text="${el.getOrderDate()}" class="blue-text"></p>
+                </div>
+                <div class="orders-container-info">
+                    <p class="orders-container-info-text">Адрес доставки</p>
+                    <p th:text="${el.getAddress()}" class="blue-text"></p>
                 </div>
             </div>
             <br>
+            <p class="list-order-text">В заказе следующие товары</p>
+            <div class="products-order">
+                <div class="orders-container-info">
+                    <p class="orders-container-info-text">Название</p>
+                </div>
+                <div class="orders-container-info">
+                    <p class="orders-container-info-text">Кол-во</p>
+                </div>
+                <div class="orders-container-info">
+                    <p class="orders-container-info-text">Цена</p>
+                </div>
+            </div>
+            <div th:each="item : ${order_product_map[el.getId()]}" class="products-order">
+                <div class="orders-container-info products-name-price">
+                    <p th:text="${item.getProduct().getName()}" class="blue-text"></p>
+                </div>
+                <div class="orders-container-info products-name-price">
+                    <p th:text="${item.getQuantityProducts()}" class="blue-text"></p>
+                </div>
+                <div class="orders-container-info products-name-price">
+                    <p th:text="${item.getProduct().getPrice()}+' тг.'" class="blue-text"></p>
+                </div>
+            </div>
         </div>
     </div>
 </div>
