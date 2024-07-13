@@ -1,6 +1,7 @@
 package kz.runtime.shop.controllers;
 
 import kz.runtime.shop.models.Basket;
+import kz.runtime.shop.models.Product;
 import kz.runtime.shop.models.User;
 import kz.runtime.shop.service.BasketService;
 import kz.runtime.shop.service.UserService;
@@ -21,6 +22,7 @@ public class BasketController {
 
     @Autowired
     private UserService userService;
+
     @GetMapping("/basket")
     public String getBasketDetails(Model model) {
         double total = basketService.getTotalPrice();

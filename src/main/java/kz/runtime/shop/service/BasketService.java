@@ -54,6 +54,16 @@ public class BasketService {
         }
     }
 
+    public boolean findProductInBasket(Long productId) {
+        User user = userService.getCurrentUser();
+        Basket basket = basketRepository.findByProductIdAndUser(productId, user);
+        if (basket!=null) {
+            return true;
+        }else {
+            return false;
+        }
+    }
+
     public void increaseQuantity(Long id) {
         Basket basket = basketRepository.findById(id).orElseThrow();
         basket.setQuantity(basket.getQuantity()+1);

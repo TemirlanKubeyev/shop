@@ -22,6 +22,10 @@
                 </div>
                 <div class="btn-container">
                     <div class="block-for-btn">
+                        <br>
+                        <div th:if="${@basketService.findProductInBasket(el.getId())}">
+                            <span>Товар добавлен в корзину</span>
+                        </div>
                         <p th:text="${el.getPrice()} + ' тг.'" class="product-box-price"></p>
                         <div th:if="${#authorization.expr('hasRole(''admin'')')}" class="block-for-btn">
                             <a th:href="'/products/' + ${el.getId()} + '/edit'" class="nav_edit">
@@ -39,6 +43,11 @@
                                     <img src="/images/edit-image.svg">&nbsp;<span>Изменить картинку</span>
                                 </button>
                             </a>
+                        </div>
+                        <div th:if="${#authorization.expr('!isAuthenticated()')}">
+                            <button type="submit" class="btn-buy-now" disabled>
+                                <img src="/images/basket.svg">&nbsp;<span>В корзину</span>
+                            </button>
                         </div>
                         <div th:if="${#authorization.expr('isAuthenticated()')}">
                             <form th:action="'/products/' + ${el.getId()} + '/add_basket'" method="post">

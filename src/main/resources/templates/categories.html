@@ -9,14 +9,19 @@
 <header th:insert="blocks/header :: header"></header>
 <div class="wrapper">
   <div class="container">
-    <h2>Добавить новую категорию и характеристику товаров</h2><br>
+    <span class="category-info-text">Добавить новую категорию и характеристику товаров</span><br>
     <form action="/categories" method="post" class="container-form">
       <input type="text" name="name" placeholder="Название категорий" class="input_edit">
       <div th:name="options" class="container-form">
         <input type="text" name="options" placeholder="Введите характеристики через запятую" class="input_edit">
       </div>
-      <button type="submit" class="btn">Добавить</button>
+      <br>
+      <button type="submit" class="add-btn">Добавить</button>
     </form>
+    <br>
+    <div th:if="emptyMassage">
+      <span class="category-info-text orange">Необходимо заполнить все поля!!!</span>
+    </div>
   </div>
 </div>
 </body>

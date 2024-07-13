@@ -11,7 +11,7 @@
   <div class="container">
     <h2>Карточка товара</h2>
     <br>
-    <div th:each="el : ${product}" class="container-block">
+    <div th:each="el : ${product}" class="container-block-second">
       <div class="product-info">
         <div class="product-inf picture">
           <img th:src="@{${el.getPhoto()}}" class="picture">
@@ -63,7 +63,6 @@
               <p th:text="${review.getText()}" class="review-text"></p>
             </div>
           </div>
-
         </div>
       </div>
     </div>

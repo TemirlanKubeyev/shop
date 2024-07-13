@@ -9,17 +9,44 @@
 <header th:insert="blocks/header :: header"></header>
 <div class="wrapper">
   <div class="container">
-      <div class="products-in-order">
-        <h4>
-          <p th:text="'В заказе № ' + ${order.getId()} + ' следующие товары: '" class="order-user-text"></p>
-        </h4>
-        <div th:each="item : ${order_products}">
-          <p th:text="'Название товара: ' + ${item.getProduct().getName()}" class="order-user-text"></p>
-          <p th:text="'Цена товара: ' + ${item.getProduct().getPrice()}" class="order-user-text"></p>
-          <p th:text="'Количество товара: ' + ${item.getQuantityProducts()}" class="order-user-text"></p>
-        </div>
-          <p th:text="'Общая стоимость товаров: ' + ${totalCost}" class="order-user-text"></p>
+    <!--
+    <div class="products-in-order">
+      <h4>
+        <p th:text="'В заказе № ' + ${order.getId()} + ' следующие товары: '" class="order-user-text"></p>
+      </h4>
+      <div th:each="item : ${order_products}">
+        <p th:text="'Название товара: ' + ${item.getProduct().getName()}" class="order-user-text"></p>
+        <p th:text="'Цена товара: ' + ${item.getProduct().getPrice()}" class="order-user-text"></p>
+        <p th:text="'Количество товара: ' + ${item.getQuantityProducts()}" class="order-user-text"></p>
       </div>
+        <p th:text="'Общая стоимость товаров: ' + ${totalCost}" class="order-user-text"></p>
+    </div>
+    -->
+    <p class="list-order-text" th:text="'В заказе № ' + ${order.getId()} + ' следующие товары: '"></p>
+    <div class="products-order">
+      <div class="orders-container-info">
+        <p class="orders-container-info-text">Название</p>
+      </div>
+      <div class="orders-container-info">
+        <p class="orders-container-info-text">Кол-во</p>
+      </div>
+      <div class="orders-container-info">
+        <p class="orders-container-info-text">Цена</p>
+      </div>
+    </div>
+    <br>
+    <div th:each="item : ${order_products}" class="products-order" >
+        <div class="orders-container-info products-name-price">
+          <p th:text="${item.getProduct().getName()}" class="blue-text"></p>
+        </div>
+        <div class="orders-container-info products-name-price">
+          <p th:text="${item.getQuantityProducts()}" class="blue-text"></p>
+        </div>
+        <div class="orders-container-info products-name-price">
+          <p th:text="${item.getProduct().getPrice()}+' тг.'" class="blue-text"></p>
+        </div>
+    </div>
+    <p th:text="'Общая стоимость товаров: ' + ${totalCost}" class="order-user-text"></p>
   </div>
 </div>
 </body>

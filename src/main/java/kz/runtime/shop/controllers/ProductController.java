@@ -2,10 +2,7 @@ package kz.runtime.shop.controllers;
 
 import kz.runtime.shop.models.*;
 import kz.runtime.shop.repositories.*;
-import kz.runtime.shop.service.CategoryService;
-import kz.runtime.shop.service.ProductService;
-import kz.runtime.shop.service.ReviewService;
-import kz.runtime.shop.service.UserService;
+import kz.runtime.shop.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -176,7 +173,5 @@ public class ProductController {
 
         return "redirect:/products/{id}/edit_photo";
     }
-
-
 }
 

@@ -26,8 +26,11 @@ public class CategoryController {
     @Autowired
     private CategoryRepository categoryRepository;
 
+    private boolean emptyMassage;
+
     @GetMapping("/categories")
-    public String getCategory() {
+    public String getCategory(Model model) {
+        model.addAttribute("emptyMassage", true);
         return "categories";
     }
 
@@ -36,6 +39,7 @@ public class CategoryController {
         List<String> splitOptions = optionService.getSplitOptions(options);
 
         if (optionService.containsEmptyOption(splitOptions) || categoryService.containsCategory(name)) {
+            emptyMassage = true;
             return "redirect:/categories";
         }
         Category category = new Category();
@@ -44,4 +48,6 @@ public class CategoryController {
         optionService.addOptions(category, splitOptions);
         return "redirect:/add_products";
     }
+
+
 }

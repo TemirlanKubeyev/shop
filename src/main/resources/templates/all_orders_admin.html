@@ -16,14 +16,14 @@
         <select name="status" class="category-select">
           <option th:each="status : ${orderStatus}" th:value="${status.name()}" th:text="${status}"></option>
         </select>
-        <button class="btn">Отфильтровать</button>
+        <button class="add-btn">Отфильтровать</button>
       </form>
       <a href="/admin/orders" class="icon basket-btn">
-        <button class="btn">Сбросить фильтр</button>
+        <button class="add-btn">Сбросить фильтр</button>
       </a>
     </div>
     <br>
-    <div th:each="el : ${orders}">
+    <div th:each="el : ${orders}" class="orders-block">
       <h4>
         <p th:text="'Заказ №: ' + ${el.getId()}"></p>
       </h4>
@@ -35,7 +35,7 @@
         <select name="orderStatus" class="category-select">
           <option th:each="status : ${orderStatus}" th:value="${status}" th:text="${status.name()}"></option>
         </select>
-        <button type="submit" class="btn">Изменить статус</button>
+        <button type="submit" class="add-btn">Изменить статус</button>
         <br>
       </form>
     </div>

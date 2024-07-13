@@ -64,6 +64,13 @@ body {
     margin-top: 10px;
 }
 
+.container-block-second {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
 .product-info {
     display: flex;
     flex-direction: row;
@@ -272,15 +279,39 @@ body {
     width: 300px;
     height: 25px;
     margin-top: 3px;
+    border: 1px solid green;
 }
 
 .input-product {
     width: 200px;
 }
 
+.select-form {
+    display: flex;
+    align-items: center;
+}
+
 .category-select {
-    width: 200px;
-    height: 25px;
+    width: 250px;
+    padding: 2px 0;
+    border: 1px solid green;
+    background-color: whitesmoke;
+    color: green;
+    cursor: pointer;
+    margin-right: 10px;
+}
+
+.category-select option {
+    font-size: 14px;
+    padding: 4px 8px;
+    background-color: #fff;
+    color: #333;
+    border-radius: unset;
+}
+
+.category-select option:checked {
+    background-color: green;
+    color: white;
 }
 
 .main-links {
@@ -416,6 +447,7 @@ body {
     width: 20px;
     height: 20px;
     background: yellowgreen;
+    cursor: pointer;
 }
 
 .pages:hover {
@@ -428,6 +460,7 @@ body {
     width: 20px;
     height: 20px;
     background: yellow;
+    cursor: pointer;
 }
 
 .register {
@@ -689,6 +722,8 @@ body {
     display: flex;
     justify-content: space-between;
     color: dimgrey;
+    margin: 5px 0;
+    border-bottom: 1px solid dimgrey;
 }
 
 .list-order-text {
@@ -702,3 +737,53 @@ body {
 .blue-text {
     color: mediumblue;
 }
+
+.add-btn {
+    background-color: green;
+    border: none;
+    padding: 5px 10px;
+    max-width: 150px;
+    color: white;
+    cursor: pointer;
+    margin: 0 5px;
+}
+
+.add-btn:hover {
+    background-color: darkgreen;
+}
+
+.add-btn:active {
+    padding-top: 6px;
+    padding-bottom: 4px;
+}
+
+.category-info-text {
+    color: darkgreen;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.orange {
+    color: orange;
+}
+
+.orders-block {
+    margin-bottom: 10px;
+}
+
+.btn-block {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 200px;
+    margin-top: 10px;
+}
+
+.none-margin-left {
+    margin-left: 0;
+}
+
+.smaller-text {
+    font-size: 17px;
+}
+

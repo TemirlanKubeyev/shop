@@ -9,23 +9,26 @@
 <header th:insert="blocks/header :: header"></header>
 <div class="wrapper">
   <div class="container">
-    <h2>Все Отзывы</h2>
+    <span class="category-info-text">Все Отзывы</span>
     <br>
     <div th:each="el : ${reviews}">
       <h4>
-        <p th:text="'Отзыв №: ' + ${el.getId()}"></p>
+        <span class="category-info-text smaller-text" th:text="'Отзыв №: ' + ${el.getId()}"></span>
       </h4>
       <p th:text="'Пользователь: ' + ${el.getUser().getFirstName() + ' ' + el.getUser().getLastName()}"></p>
-      <p th:text="'Товар: ' + ${el.getProduct().getName()}"></p>
+      <a th:href="'/products/'+${el.getProduct().getId()}+'/details'">
+        <p th:text="'Товар: ' + ${el.getProduct().getName()}"></p>
+      </a>
       <p th:text="'Оценка: ' + ${el.getScore()}"></p>
       <p th:text="'Текст: ' + ${el.getText()}"></p>
-      <form th:action="'/admin/reviews/published/' + ${el.getId()}" method="post">
-        <button type="submit" class="btn">Опубликовать</button>
-      </form>
-      <form th:action="'/admin/reviews/delete/' + ${el.getId()}" method="post">
-        <button type="submit" class="btn">Удалить</button>
-      </form>
-      <br>
+      <div class="btn-block">
+        <form th:action="'/admin/reviews/published/' + ${el.getId()}" method="post">
+          <button type="submit" class="add-btn none-margin-left">Опубликовать</button>
+        </form>
+        <form th:action="'/admin/reviews/delete/' + ${el.getId()}" method="post">
+          <button type="submit" class="add-btn none-margin-left">Удалить</button>
+        </form>
+      </div>
     </div>
   </div>
 </div>

@@ -38,14 +38,18 @@
                 <img src="/images/orders.svg" class="main-image">
                 <span>Заказы</span>
             </a>
-            <a href="/admin/homePage" class="main-links">
-                <img src="/images/profile.svg" class="main-image">
-                <span>Профиль</span>
-            </a>
-            <a href="/register_page" class="main-links">
-                <img src="/images/register.svg" class="main-image">
-                <span>Регистрация</span>
-            </a>
+            <div th:if="${#authorization.expr('isAuthenticated()')}">
+                <a href="/admin/homePage" class="main-links">
+                    <img src="/images/profile.svg" class="main-image">
+                    <span>Профиль</span>
+                </a>
+            </div>
+            <div th:if="${#authorization.expr('!isAuthenticated()')}">
+                <a href="/register_page" class="main-links">
+                    <img src="/images/register.svg" class="main-image">
+                    <span>Регистрация</span>
+                </a>
+            </div>
             <div th:if="${#authorization.expr('!isAuthenticated()')}">
                 <a href="/login" class="main-links">
                     <img src="/images/logout.svg" class="main-image">
