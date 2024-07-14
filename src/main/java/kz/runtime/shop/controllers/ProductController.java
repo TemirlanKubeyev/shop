@@ -134,6 +134,8 @@ public class ProductController {
         Product product = productService.getProduct(id);
         model.addAttribute("product", product);
 
+
+
         float average = productService.averageScoreReviews(product, true);
         List<Review> reviews = reviewService.getReviewsByProductAndPublished(product, true);
         model.addAttribute("average", average);

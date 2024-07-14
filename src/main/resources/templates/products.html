@@ -14,7 +14,7 @@
             <div th:each="el : ${products}" class="product-box">
                 <div class="picture-name">
                     <div class="product-box-pic">
-                        <img th:src="@{${el.getPhoto()}}" class="pic">
+                        <img th:src="@{/images?file=__${el.getPhoto()}__}" class="pic">
                     </div>
                     <a th:href="'/products/' + ${el.getId()} + '/details'" class="product-name-link">
                         <span th:text="${el.getName()}" class="product-name"></span>

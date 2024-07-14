@@ -12,7 +12,7 @@
         <h2 class="profile">Ваш профиль</h2><br>
         <div class="user-photo">
             <div class="add_photo">
-                <img th:src="@{${userPhoto}}" class="user-photo-photo">
+                <img th:src="@{/images?file=__${userPhoto}__}" class="user-photo-photo">
                 <form action="/admin/homePage" method="post" enctype="multipart/form-data">
                     <input type="file" name="photo">
                     <button type="submit">Готово</button>

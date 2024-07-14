@@ -14,7 +14,7 @@
         <div th:each="el : ${baskets}" class="container-block">
             <div class="picture-product-info">
                 <div class="product-basket-pic">
-                    <img th:src="@{${el.getProduct().getPhoto()}}">
+                    <img th:src="@{/images?file=__${el.getProduct().getPhoto()}__}">
                 </div>
                 <div class="product-info-text">
                     <p th:text="${el.getProduct().getName()}"></p>

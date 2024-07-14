@@ -168,7 +168,7 @@ public class ProductService {
     }
 
     public String createDirectoryPhotos(MultipartFile photo, String directoryName) throws Exception {
-        String staticPath = "src/main/resources/static/";
+        String staticPath = "C:\\Users\\Kasht\\IdeaProjects\\shop\\";
         String dirPath = staticPath+directoryName;
         Path path = Paths.get(dirPath);
         if (!Files.exists(path)) {
@@ -182,7 +182,7 @@ public class ProductService {
         // перезапись если имеется похожий файл
         if (!(photo.isEmpty())) {
             Files.copy(photo.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
-            String pathPhoto = "/" + directoryName + fileName;
+            String pathPhoto = directoryName + fileName;
             return pathPhoto;
         }else {
             return "EmptyFile";

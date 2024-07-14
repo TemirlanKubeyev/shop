@@ -14,7 +14,7 @@
     <div th:each="el : ${product}" class="container-block-second">
       <div class="product-info">
         <div class="product-inf picture">
-          <img th:src="@{${el.getPhoto()}}" class="picture">
+          <img th:src="@{/images?file=__${el.getPhoto()}__}" class="picture">
         </div>
         <div class="product-inf chars">
           <br>
