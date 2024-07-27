@@ -1,4 +1,4 @@
-drop table if exists categories, options, values, products, users, orders, basket, reviews;
+drop table if exists categories, options, values, products, users, orders, basket, reviews, order_products;
 
 create table categories
 (
@@ -51,12 +51,7 @@ create table users
 
 
 alter table users
-drop column photo;
-
-alter table users
 add column role int2;
-
-drop table if exists orders, order_products;
 
 create table orders
 (
@@ -80,8 +75,6 @@ create table order_products
     foreign key (product_id) references products (id)
 );
 
-drop table if exists basket;
-
 create table basket
 (
     id         serial8,
@@ -92,8 +85,6 @@ create table basket
     foreign key (user_id) references users (id),
     foreign key (product_id) references products (id)
 );
-
-drop table if exists reviews;
 
 create table reviews
 (
