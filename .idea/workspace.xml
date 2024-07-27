@@ -5,22 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="4dc9afa5-7023-4d80-a672-fb5e5355e9ab" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/.gitignore" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/dataSources.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/sqldialects.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/schema.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/spring.txt" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kz/runtime/shop/controllers/ProductController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kz/runtime/shop/controllers/ProductController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/kz/runtime/shop/service/ProductService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/kz/runtime/shop/service/ProductService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/add_products_with_characters.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/add_products_with_characters.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/templates/product_photo_edit.html" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/templates/product_photo_edit.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -243,7 +228,7 @@
       <workItem from="1720843154665" duration="6669000" />
       <workItem from="1720930817892" duration="5793000" />
       <workItem from="1721754265582" duration="2164000" />
-      <workItem from="1722053450961" duration="834000" />
+      <workItem from="1722053450961" duration="1136000" />
     </task>
     <servers />
   </component>
