@@ -13,7 +13,7 @@
     <br>
     <div class="picture-name edit">
       <div class="product-box-pic">
-        <img th:src="@{${product.getPhoto()}}" class="pic">
+        <img th:src="@{/images?file=__${product.getPhoto()}__}" class="pic">
       </div>
       <span th:text="${product.getName()}" class="product-name"></span>
       <p th:text="${product.getPrice()} + ' тг.'" class="product-box-price"></p>
@@ -21,7 +21,7 @@
     <form th:action="'/products/'+${product.getId()}+'/edit_photo'" method="post" enctype="multipart/form-data" class="photo-edit">
       <br>
       <input type="file" name="photo">
-      <button type="submit" class="btn-done">Готово</button>
+      <button type="submit" class="add-btn none-margin-left">Готово</button>
     </form>
   </div>
 </div>

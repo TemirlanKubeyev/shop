@@ -21,8 +21,6 @@ import java.util.List;
 @Controller
 public class ProductController {
     @Autowired
-    private UserService userService;
-    @Autowired
     private ProductRepository productRepository;
     @Autowired
     private ProductService productService;
@@ -133,8 +131,6 @@ public class ProductController {
     public String detailsProduct(@PathVariable (value = "id") long id, Model model) {
         Product product = productService.getProduct(id);
         model.addAttribute("product", product);
-
-
 
         float average = productService.averageScoreReviews(product, true);
         List<Review> reviews = reviewService.getReviewsByProductAndPublished(product, true);

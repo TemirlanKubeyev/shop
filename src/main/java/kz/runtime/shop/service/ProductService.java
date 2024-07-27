@@ -35,7 +35,7 @@ public class ProductService {
     private ReviewRepository reviewRepository;
 
     public Pageable getPageable(int page) {
-        Pageable pageable = PageRequest.of(page, 2);
+        Pageable pageable = PageRequest.of(page, 10);
         return pageable;
     }
 
