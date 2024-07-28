@@ -24,9 +24,9 @@ insert into products (category_id, name, price)
 values (1,'Intel Core I9 9900',1200),
        (2,'Samsung SU556270',1500);
 
-insert into users (first_name, last_name, email, password)
+/*insert into users (first_name, last_name, email, password)
 values ('Max', 'Holloway', 'max@gmail.com', '123456789'),
-       ('Alex', 'Volkanovski', 'alex@gmail.com', '123456');
+       ('Alex', 'Volkanovski', 'alex@gmail.com', '123456');*/
 
 insert into orders (status, order_date, address, user_id)
 values (1, '2023-12-10', 'downtown street', 1),
