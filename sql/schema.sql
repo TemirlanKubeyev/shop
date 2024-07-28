@@ -46,6 +46,7 @@ create table users
     last_name  varchar,
     email      varchar,
     password   varchar,
+    photoPath  varchar,
     primary key (id)
 );
 

@@ -45,7 +45,7 @@ public class BasketService {
     public void addProductToBasket(Long id) {
         Product product = productRepository.findById(id).orElseThrow();
         User user = userService.getCurrentUser();
-        if(basketRepository.findAllByProduct(product).isEmpty()) {
+        if(basketRepository.findAllByProductAndUser(product, user).isEmpty()) {
             Basket basket = new Basket();
             basket.setUser(user);
             basket.setProduct(product);
