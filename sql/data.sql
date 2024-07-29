@@ -20,9 +20,9 @@ values (1,1,'Intel'),
        (2,6,'AH-IPS'),
        (2,7,'2560*1440');
 
-insert into products (category_id, name, price)
-values (1,'Intel Core I9 9900',1200),
-       (2,'Samsung SU556270',1500);
+insert into products (category_id, name, price, photo)
+values (1,'Процессор Intel Core i5 12400F OEM',51905, 'photos/1722281298966_intelcorei5.jpg'),
+       (2,'Смартфон Apple iPhone 15 Pro Max 256Gb синий',604390, 'photos/1722279413348_iphone.jpg');
 
 insert into users (first_name, last_name, email, password, role)
 values ('Темирлан', 'Кубеев', 'Temir', '$2a$10$Wgd.PCOUIkf3EU1gPK8HKO/zAiOQAFSm57QM.KpIf7KW1QMbznpMi', 0), -- 1
@@ -46,7 +46,5 @@ values (1, 1, 1),
 
 insert into reviews (text, score, user_id, product_id, published)
 values ('not bad product', 3, 1, 2, false),
-       ('good product', 5, 1, 2, false),
-       ('good product', 5, 2, 2, false),
-       ('bad product', 1, 2, 1, false);
+       ('good product', 5, 2, 1, false);
 

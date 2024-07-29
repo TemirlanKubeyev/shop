@@ -787,3 +787,9 @@ body {
     font-size: 17px;
 }
 
+.block-for-radio-score {
+    margin: 10px 0;
+    display: flex;
+    align-items: center;
+}
+

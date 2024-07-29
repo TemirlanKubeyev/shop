@@ -11,7 +11,7 @@ import java.io.IOException;
 public class FileController {
     @GetMapping(value = "/images", produces = "image/jpeg")
     public byte[] getFiles(@RequestParam (name = "file") String filePath) throws IOException {
-        String basePath = "C:\\Users\\Kasht\\IdeaProjects\\shop\\";
+        //String basePath = "C:\\Users\\Kasht\\IdeaProjects\\shop\\";
         FileInputStream fileInputStream = new FileInputStream(filePath);
         byte[] arr = fileInputStream.readAllBytes();
 

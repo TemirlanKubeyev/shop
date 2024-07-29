@@ -35,6 +35,7 @@ create table products
     name        varchar,
     price       int8,
     category_id int8,
+    photo       varchar,
     primary key (id),
     foreign key (category_id) references categories (id)
 );
@@ -46,7 +47,7 @@ create table users
     last_name  varchar,
     email      varchar,
     password   varchar,
-    photoPath  varchar,
+    photo_path  varchar,
     primary key (id)
 );
 

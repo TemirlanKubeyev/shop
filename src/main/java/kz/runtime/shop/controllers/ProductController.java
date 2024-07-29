@@ -33,6 +33,12 @@ public class ProductController {
     @Autowired
     private CategoryRepository categoryRepository;
 
+    @Autowired
+    private ReviewRepository reviewRepository;
+
+    @Autowired
+    private UserService userService;
+
     private boolean message;
 
     @GetMapping("/products")
@@ -137,6 +143,14 @@ public class ProductController {
         model.addAttribute("average", average);
         model.addAttribute("reviews", reviews);
 
+        User currentUser = userService.getCurrentUser();
+        List<Review> reviewsByCurrentUser = reviewRepository.findByUserAndProduct(currentUser, product);
+        if (reviewsByCurrentUser.isEmpty()) {
+            model.addAttribute("reviewsByCurrentUser", true);
+        }else {
+            model.addAttribute("reviewsByCurrentUser", false);
+        }
+
         // передает все характеристики товара
         List<Option> options = product.getCategory().getOption();
         model.addAttribute("options", options);
@@ -161,7 +175,7 @@ public class ProductController {
         String productPhotoPath = productRepository.findById(id).orElseThrow().getPhoto();
 
         if(!(productPhotoPath == null)) {
-            Path pathPrevPhoto = Path.of("src/main/resources/static" + productPhotoPath);
+            Path pathPrevPhoto = Path.of("photos/" + productPhotoPath);
             productService.deletePhotoFromDirectory(pathPrevPhoto);
         }
 

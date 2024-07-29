@@ -13,8 +13,9 @@ public class ReviewController {
     private ReviewService reviewService;
     @PostMapping("/products/{id}/details")
     public String addReview(@PathVariable(value = "id") Long id, @RequestParam String text,
-                            @RequestParam float score) {
-        reviewService.addReview(id, text, score);
+                            @RequestParam String score) {
+        long scoreLong = Long.parseLong(score);
+        reviewService.addReview(id, text, scoreLong);
         return "redirect:/products/{id}/details";
     }
 }

@@ -37,13 +37,28 @@
       <br>
       <div class="review-box">
         <div th:if="${#authorization.expr('isAuthenticated()')}">
-          <span class="review-had">Оставьте отзыв</span>
-          <form method="post" class="form-textarea">
-            <textarea name="text" class="review-input-text" placeholder="Напишите отзыв здесь"></textarea>
-            <img src="/images/starts.svg" class="image-stars">
-            <input type="text" name="score" class="review-score">
-            <button type="submit" class="product-btn">Оставить отзыв</button><br>
-          </form>
+          <div th:unless="${reviewsByCurrentUser}">
+            <p class="review-had">Вы уже оставили отзыв о данном товаре, отзыв на проверке</p>
+          </div>
+          <div th:if="${reviewsByCurrentUser}" class="published_block">
+            <span class="review-had">Оставьте отзыв</span>
+            <form method="post" class="form-textarea">
+              <textarea name="text" class="review-input-text" placeholder="Напишите отзыв здесь"></textarea>
+              <div class="block-for-radio-score">
+                <label for="1">1</label>
+                <input type="radio" id="1" name="score" class="review-score" value="1">
+                <label for="2">2</label>
+                <input type="radio" id="2" name="score" class="review-score" value="2">
+                <label for="3">3</label>
+                <input type="radio" id="3" name="score" class="review-score" value="3">
+                <label for="4">4</label>
+                <input type="radio" id="4" name="score" class="review-score" value="4">
+                <label for="5">5</label>
+                <input type="radio" id="5" name="score" class="review-score" value="5">
+              </div>
+              <button type="submit" class="product-btn">Оставить отзыв</button><br>
+            </form>
+          </div>
         </div>
         <div th:if="${#authorization.expr('!isAuthenticated()')}">
           <span class="review-had">Чтобы оставить отзыв о товаре, Вам необходимо авторизоваться!!!</span>
@@ -52,7 +67,6 @@
       <div class="review-second-box">
         <div th:each="review : ${reviews}" class="review-block">
           <div class="review-user">
-            <!--<img src="/images/review-user.svg" alt="user" class="review-user-pic">-->
             <img th:src="@{${review.getUser().getPhotoPath()}}" class="review-user-pic" alt="без фото">
             <div class="review-user-point">
               <div class="user-info-name-score">
