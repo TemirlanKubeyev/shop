@@ -10,7 +10,6 @@ public class Review {
     private Long id;
     private String text;
     private float score;
-
     private boolean published = false;
 
     @ManyToOne

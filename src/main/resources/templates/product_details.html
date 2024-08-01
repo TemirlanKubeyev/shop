@@ -37,10 +37,10 @@
       <br>
       <div class="review-box">
         <div th:if="${#authorization.expr('isAuthenticated()')}">
-          <div th:unless="${reviewsByCurrentUser}">
+          <div th:unless="${reviewStatus}">
             <p class="review-had">Вы уже оставили отзыв о данном товаре, отзыв на проверке</p>
           </div>
-          <div th:if="${reviewsByCurrentUser}" class="published_block">
+          <div th:if="${reviewBlock}" class="published_block">
             <span class="review-had">Оставьте отзыв</span>
             <form method="post" class="form-textarea">
               <textarea name="text" class="review-input-text" placeholder="Напишите отзыв здесь"></textarea>
@@ -61,7 +61,7 @@
           </div>
         </div>
         <div th:if="${#authorization.expr('!isAuthenticated()')}">
-          <span class="review-had">Чтобы оставить отзыв о товаре, Вам необходимо авторизоваться!!!</span>
+            <span class="review-had">Чтобы оставить отзыв о товаре, Вам необходимо авторизоваться!!!</span>
         </div>
       </div>
       <div class="review-second-box">

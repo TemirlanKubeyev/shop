@@ -144,11 +144,19 @@ public class ProductController {
         model.addAttribute("reviews", reviews);
 
         User currentUser = userService.getCurrentUser();
-        List<Review> reviewsByCurrentUser = reviewRepository.findByUserAndProduct(currentUser, product);
-        if (reviewsByCurrentUser.isEmpty()) {
-            model.addAttribute("reviewsByCurrentUser", true);
+        Review review = reviewRepository.findByUserAndProductAndPublished(currentUser, product, false);
+        Review review1 = reviewRepository.findByUserAndProductAndPublished(currentUser, product,true);
+
+        if (review==null) {
+            model.addAttribute("reviewStatus", true);
+            model.addAttribute("reviewBlock", true);
         }else {
-            model.addAttribute("reviewsByCurrentUser", false);
+            model.addAttribute("reviewStatus", false);
+            model.addAttribute("reviewBlock", false);
+        }
+
+        if (review1 != null && review1.isPublished()) {
+            model.addAttribute("reviewBlock", false);
         }
 
         // передает все характеристики товара
