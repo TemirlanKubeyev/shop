@@ -4,6 +4,7 @@ import kz.runtime.shop.models.*;
 import kz.runtime.shop.repositories.*;
 import kz.runtime.shop.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
@@ -14,8 +15,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.lang.constant.Constable;
 import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.List;
 
 @Controller
@@ -180,16 +183,15 @@ public class ProductController {
     public String editProductPhoto (@PathVariable (value= "id") Long id, @RequestParam (name = "photo") MultipartFile photo) throws Exception {
         String directory = "photos/";
         String path = productService.createDirectoryPhotos(photo, directory);
-        String productPhotoPath = productRepository.findById(id).orElseThrow().getPhoto();
-
-        if(!(productPhotoPath == null)) {
-            Path pathPrevPhoto = Path.of("photos/" + productPhotoPath);
-            productService.deletePhotoFromDirectory(pathPrevPhoto);
-        }
+        Product product = productService.getProduct(id);
+        String oldPhotoPath = product.getPhoto();
+        Path path1 = Paths.get(oldPhotoPath);
 
         if (!(path.equals("EmptyFile"))) {
             productService.savePathPhoto(path, id);
         }
+
+        productService.deletePhotoFromDirectory(path1);
 
         return "redirect:/products/{id}/edit_photo";
     }
