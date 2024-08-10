@@ -29,8 +29,10 @@ public class OrderService {
     @Autowired
     private UserService userService;
 
+
     public List<Order> getAllOrders() {
-        return orderRepository.findAll();
+        User currentUser = userService.getCurrentUser();
+        return orderRepository.findAllByUserOrderByIdAsc(currentUser);
     }
 
     public void addOrderFormBaskets(User user, List<Basket> baskets, String address) {

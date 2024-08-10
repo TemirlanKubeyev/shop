@@ -44,7 +44,11 @@ public class RegisController {
         } else {
             errorMessage = false;
         }
-        return "redirect:/register_page/info_page";
 
+        if (errorMessage) {
+            return "redirect:/register_page";
+        } else {
+            return "redirect:/register_page/info_page";
+        }
     }
 }

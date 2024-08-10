@@ -21,8 +21,8 @@ values (1,1,'Intel'),
        (2,7,'2560*1440');
 
 insert into products (category_id, name, price, photo)
-values (1,'Процессор Intel Core i5 12400F OEM',51905, 'photos/1722281298966_intelcorei5.jpg'),
-       (2,'Смартфон Apple iPhone 15 Pro Max 256Gb синий',604390, 'photos/1722279413348_iphone.jpg');
+values (1,'Процессор Intel Core i5 12400F OEM',51905, 'photos/1722626898555_intelcorei5.jpg'),
+       (2,'Смартфон Apple iPhone 15 Pro Max 256Gb синий',604390, 'photos/1722626806616_iphone.jpg');
 
 insert into users (first_name, last_name, email, password, role)
 values ('Темирлан', 'Кубеев', 'Temir', '$2a$10$Wgd.PCOUIkf3EU1gPK8HKO/zAiOQAFSm57QM.KpIf7KW1QMbznpMi', 0), -- 1
@@ -30,14 +30,11 @@ values ('Темирлан', 'Кубеев', 'Temir', '$2a$10$Wgd.PCOUIkf3EU1gPK8
 
 insert into orders (status, order_date, address, user_id)
 values (1, '2023-12-10', 'downtown street', 1),
-       (0, '2023-12-10', 'downtown street', 1),
-       (1, '2023-12-10', 'downtown street', 1),
        (0, '2023-12-10', 'downtown street', 1);
 
 insert into order_products (order_id, product_id, quantity_products)
 values (1, 1, 1),
-       (2, 1, 1),
-       (3, 2, 1);
+       (2, 1, 1);
 
 insert into basket (user_id, product_id, quantity)
 values (1, 1, 1),
