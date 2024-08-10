@@ -27,13 +27,8 @@ public class RegisterService {
             return false;
         }
 
-        List<User> users = userRepository.findAll();
-        if (!(users.isEmpty())) {
-            for (int i = 0; i < users.size(); i++) {
-                if (users.get(i).getEmail().equals(email)) {
-                    return false;
-                }
-            }
+        if (userRepository.existsUserByEmail(email)) {
+            return false;
         }
 
         if(userRepository.findByEmail(email)==null) {

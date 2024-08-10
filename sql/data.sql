@@ -25,8 +25,8 @@ values (1,'Процессор Intel Core i5 12400F OEM',51905, 'photos/172262689
        (2,'Смартфон Apple iPhone 15 Pro Max 256Gb синий',604390, 'photos/1722626806616_iphone.jpg');
 
 insert into users (first_name, last_name, email, password, role)
-values ('Темирлан', 'Кубеев', 'Temir', '$2a$10$Wgd.PCOUIkf3EU1gPK8HKO/zAiOQAFSm57QM.KpIf7KW1QMbznpMi', 0), -- 1
-       ('Руслан', 'Кубеев', 'Kub', '$2a$10$BUXN8yaZQBqTEDI0MBMiSOe0HZQz1Mx6HvB0L8P901brXwJyppfke', 1); -- 2
+values ('Темирлан', 'Кубеев', 'temir@gmail.com', '$2a$10$Wgd.PCOUIkf3EU1gPK8HKO/zAiOQAFSm57QM.KpIf7KW1QMbznpMi', 0), -- 1
+       ('Руслан', 'Кубеев', 'kub@gmail.com', '$2a$10$BUXN8yaZQBqTEDI0MBMiSOe0HZQz1Mx6HvB0L8P901brXwJyppfke', 1); -- 2
 
 insert into orders (status, order_date, address, user_id)
 values (1, '2023-12-10', 'downtown street', 1),
