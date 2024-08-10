@@ -8,6 +8,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @Service
 public class RegisterService {
     @Autowired
@@ -19,6 +21,21 @@ public class RegisterService {
         if (first_name.isEmpty() || last_name.isEmpty() || email.isEmpty() || password.isEmpty()) {
             return false;
         }
+        boolean emailRegex = email.matches("^[A-Za-z]([A-Za-z]*)\\d*\\@([a-z]*)\\.([a-z]*)");
+
+        if (!(emailRegex)) {
+            return false;
+        }
+
+        List<User> users = userRepository.findAll();
+        if (!(users.isEmpty())) {
+            for (int i = 0; i < users.size(); i++) {
+                if (users.get(i).getEmail().equals(email)) {
+                    return false;
+                }
+            }
+        }
+
         if(userRepository.findByEmail(email)==null) {
             User user = new User();
             user.setFirstName(first_name);
@@ -34,5 +51,4 @@ public class RegisterService {
             return false;
         }
     }
-
 }
