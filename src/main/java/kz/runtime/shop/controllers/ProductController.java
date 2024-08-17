@@ -39,6 +39,9 @@ public class ProductController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private FileService fileService;
+
     private boolean message;
 
     @GetMapping("/products")
@@ -181,7 +184,7 @@ public class ProductController {
 
     @PostMapping("/products/{id}/edit_photo")
     public String editProductPhoto (@PathVariable (value= "id") Long id, @RequestParam (name = "photo") MultipartFile photo) throws Exception {
-        boolean correctFormat = productService.correctFormatFile(photo);
+        boolean correctFormat = fileService.correctFormatFile(photo);
         if (correctFormat) {
             String directory = "photos/";
             String path = productService.createDirectoryPhotos(photo, directory);

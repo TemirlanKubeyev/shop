@@ -9,6 +9,7 @@ import kz.runtime.shop.repositories.OrderProductRepository;
 import kz.runtime.shop.repositories.OrderRepository;
 import kz.runtime.shop.repositories.UserRepository;
 import kz.runtime.shop.service.AdminService;
+import kz.runtime.shop.service.FileService;
 import kz.runtime.shop.service.OrderService;
 import kz.runtime.shop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -46,7 +47,7 @@ public class AdminController {
     private OrderRepository orderRepository;
 
     @Autowired
-    private UserRepository userRepository;
+    private FileService fileService;
 
     @GetMapping("/admin/reviews")
     public String getAllReviews(Model model) {
@@ -85,7 +86,8 @@ public class AdminController {
 
 
     @GetMapping("/admin/homePage")
-    public String getAdminPage(Model model) {
+    public String getAdminPage(Model model, @RequestParam (name = "correctFormat", required = false,
+            defaultValue = "true") boolean correctFormat) {
         User currentUser = userService.getCurrentUser();
         model.addAttribute("currentUser", currentUser);
         List<Order> orders = orderService.getAllOrders();
@@ -94,23 +96,23 @@ public class AdminController {
         model.addAttribute("totalPrice", totalPrice);
         String userPhoto = userService.getCurrentUser().getPhotoPath();
         model.addAttribute("userPhoto", userPhoto);
+        model.addAttribute("correctFormat", correctFormat);
         return "admin_page";
     }
 
     @PostMapping("/admin/homePage")
     public String setAdminPage(@RequestParam (name = "photo") MultipartFile photo) throws Exception {
-        String directoryName = "photos/";
-
-        Path pathPrevPhoto = Path.of("src/main/resources/static"+userService.getCurrentUser().getPhotoPath());
-        adminService.deletePhotoFromDirectory(pathPrevPhoto);
-
-        String path = adminService.createDirectoryPhotos(photo, directoryName);
-
-        if (!(path.equals("EmptyFile"))) {
-            adminService.savePathPhoto(path);
+        boolean correctFormat = fileService.correctFormatFile(photo);
+        if (correctFormat) {
+            String directoryName = "photos/";
+            Path pathPrevPhoto = Path.of("src/main/resources/static"+userService.getCurrentUser().getPhotoPath());
+            adminService.deletePhotoFromDirectory(pathPrevPhoto);
+            String path = adminService.createDirectoryPhotos(photo, directoryName);
+            if (!(path.equals("EmptyFile"))) {
+                adminService.savePathPhoto(path);
+            }
         }
-
-        return "redirect:/admin/homePage";
+        return "redirect:/admin/homePage?correctFormat=" + correctFormat;
     }
 
     @GetMapping("/admin/homePage/{id}/details")

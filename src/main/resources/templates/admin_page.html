@@ -13,6 +13,9 @@
         <div class="user-photo">
             <div class="add_photo">
                 <img th:src="@{/images?file=__${userPhoto}__}" class="user-photo-photo">
+                <div th:if="${correctFormat == false}" class="correct-format-box">
+                    <span class="correct-format-message_smaller">Неверный формат, загрузите файл формата jpeg/png</span>
+                </div>
                 <form action="/admin/homePage" method="post" enctype="multipart/form-data">
                     <input type="file" name="photo">
                     <button type="submit">Готово</button>

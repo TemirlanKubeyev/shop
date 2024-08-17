@@ -198,14 +198,6 @@ public class ProductService {
         Files.deleteIfExists(pathPrevPhoto);
     }
 
-    public boolean correctFormatFile(MultipartFile photo) {
-        if (photo.getContentType().equals("image/jpeg") || photo.getContentType().equals("image/png")) {
-            return true;
-        }else {
-            return false;
-        }
-    }
-
 }
 
 

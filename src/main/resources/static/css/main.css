@@ -798,3 +798,10 @@ body {
     font-size: 18px;
 }
 
+.correct-format-message_smaller {
+    color: red;
+}
+
+.correct-format-box {
+    margin: 5px 0;
+}
