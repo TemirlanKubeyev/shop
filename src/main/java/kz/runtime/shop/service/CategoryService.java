@@ -27,15 +27,16 @@ public class CategoryService {
 
     public boolean containsCategory(String categoryName) {
         for (int i = 0; i < getAllCategories().size(); i++) {
-            if(getAllCategories().get(i).getName().equals(categoryName)) {
+            if (getAllCategories().get(i).getName().equals(categoryName)) {
                 return true;
             }
         }
         return false;
     }
 
-
-
+    public boolean uniqueCategory(String categoryName) {
+        return categoryRepository.existsByName(categoryName);
+    }
 
 
 }

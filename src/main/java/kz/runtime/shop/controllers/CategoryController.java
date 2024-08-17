@@ -38,7 +38,14 @@ public class CategoryController {
     public String addCategory(@RequestParam String name, @RequestParam String options) {
         List<String> splitOptions = optionService.getSplitOptions(options);
 
-        if (optionService.containsEmptyOption(splitOptions) || categoryService.containsCategory(name)) {
+        if (categoryService.uniqueCategory(name)) {
+            emptyMassage = true;
+            return "redirect:/categories";
+        }
+
+        if (categoryService.uniqueCategory(name)
+                || optionService.containsEmptyOption(splitOptions)
+                || categoryService.containsCategory(name)) {
             emptyMassage = true;
             return "redirect:/categories";
         }
