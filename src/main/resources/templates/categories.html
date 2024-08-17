@@ -19,8 +19,8 @@
       <button type="submit" class="add-btn">Добавить</button>
     </form>
     <br>
-    <div th:if="emptyMassage">
-      <span class="category-info-text orange">Необходимо заполнить все поля либо категория уже существует</span>
+    <div th:if="${emptyOptionOrNotUniqueCategory == false}">
+      <span class="category-info-text orange">Введите характеристики и уникальную категорию</span>
     </div>
   </div>
 </div>

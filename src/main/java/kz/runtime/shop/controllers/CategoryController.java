@@ -26,35 +26,25 @@ public class CategoryController {
     @Autowired
     private CategoryRepository categoryRepository;
 
-    private boolean emptyMassage;
-
     @GetMapping("/categories")
-    public String getCategory(Model model) {
-        model.addAttribute("emptyMassage", true);
+    public String getCategory(Model model, @RequestParam (name = "emptyOptionOrNotUniqueCategory",
+            required = false, defaultValue = "true") boolean emptyOptionOrNotUniqueCategory) {
+        model.addAttribute("emptyOptionOrNotUniqueCategory", emptyOptionOrNotUniqueCategory);
         return "categories";
     }
 
     @PostMapping("/categories")
     public String addCategory(@RequestParam String name, @RequestParam String options) {
         List<String> splitOptions = optionService.getSplitOptions(options);
-
-        if (categoryService.uniqueCategory(name)) {
-            emptyMassage = true;
-            return "redirect:/categories";
+        if (!(categoryService.uniqueCategory(name)) || optionService.containsEmptyOption(splitOptions)) {
+            return "redirect:/categories?emptyOptionOrNotUniqueCategory=false";
         }
 
-        if (categoryService.uniqueCategory(name)
-                || optionService.containsEmptyOption(splitOptions)
-                || categoryService.containsCategory(name)) {
-            emptyMassage = true;
-            return "redirect:/categories";
-        }
         Category category = new Category();
         category.setName(name);
         categoryRepository.save(category);
         optionService.addOptions(category, splitOptions);
         return "redirect:/add_products";
+
     }
-
-
 }

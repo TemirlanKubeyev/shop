@@ -22,7 +22,7 @@ values (1,1,'Intel'),
 
 insert into products (category_id, name, price, photo)
 values (1,'Процессор Intel Core i5 12400F OEM',51905, 'photos/1722626898555_intelcorei5.jpg'),
-       (2,'Смартфон Apple iPhone 15 Pro Max 256Gb синий',604390, 'photos/1722626806616_iphone.jpg');
+       (2,'Смартфон Apple iPhone 15 Pro Max 256Gb синий',604390, 'photos/1723912635047_iphone.jpg');
 
 insert into users (first_name, last_name, email, password, role)
 values ('Темирлан', 'Кубеев', 'temir@gmail.com', '$2a$10$Wgd.PCOUIkf3EU1gPK8HKO/zAiOQAFSm57QM.KpIf7KW1QMbznpMi', 0), -- 1
