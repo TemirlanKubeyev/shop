@@ -18,7 +18,11 @@
       <span th:text="${product.getName()}" class="product-name"></span>
       <p th:text="${product.getPrice()} + ' тг.'" class="product-box-price"></p>
     </div>
-    <form th:action="'/products/'+${product.getId()}+'/edit_photo'" method="post" enctype="multipart/form-data" class="photo-edit">
+    <div th:if="${correctFormat == false}">
+      <span class="correct-format-message">Неверный формат, загрузите файл формата jpeg/png</span>
+    </div>
+    <form th:action="'/products/'+${product.getId()}+'/edit_photo'" method="post"
+          enctype="multipart/form-data" class="photo-edit">
       <br>
       <input type="file" name="photo">
       <button type="submit" class="add-btn none-margin-left">Готово</button>

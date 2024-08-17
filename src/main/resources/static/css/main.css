@@ -793,3 +793,8 @@ body {
     align-items: center;
 }
 
+.correct-format-message {
+    color: red;
+    font-size: 18px;
+}
+

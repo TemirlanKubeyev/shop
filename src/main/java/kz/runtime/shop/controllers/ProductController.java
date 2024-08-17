@@ -4,7 +4,6 @@ import kz.runtime.shop.models.*;
 import kz.runtime.shop.repositories.*;
 import kz.runtime.shop.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.annotation.AnnotationUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
@@ -15,8 +14,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
-import java.lang.constant.Constable;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.List;
@@ -173,27 +170,31 @@ public class ProductController {
     }
 
     @GetMapping("/products/{id}/edit_photo")
-    public String editProductPhoto(@PathVariable (value = "id") Long id, Model model) {
+    public String editProductPhoto(@PathVariable (value = "id") Long id,
+                                   @RequestParam (name = "correctFormat", required = false, defaultValue = "true")
+                                   boolean correctFormat, Model model) {
         Product product = productRepository.findById(id).orElseThrow();
         model.addAttribute("product", product);
+        model.addAttribute("correctFormat", correctFormat);
         return "product_photo_edit";
     }
 
     @PostMapping("/products/{id}/edit_photo")
     public String editProductPhoto (@PathVariable (value= "id") Long id, @RequestParam (name = "photo") MultipartFile photo) throws Exception {
-        String directory = "photos/";
-        String path = productService.createDirectoryPhotos(photo, directory);
-        Product product = productService.getProduct(id);
-        String oldPhotoPath = product.getPhoto();
-        Path path1 = Paths.get(oldPhotoPath);
-
-        if (!(path.equals("EmptyFile"))) {
-            productService.savePathPhoto(path, id);
+        boolean correctFormat = productService.correctFormatFile(photo);
+        if (correctFormat) {
+            String directory = "photos/";
+            String path = productService.createDirectoryPhotos(photo, directory);
+            Product product = productService.getProduct(id);
+            String oldPhotoPath = product.getPhoto();
+            Path path1 = Paths.get(oldPhotoPath);
+            if (!(path.equals("EmptyFile"))) {
+                productService.savePathPhoto(path, id);
+            }
+            productService.deletePhotoFromDirectory(path1);
         }
 
-        productService.deletePhotoFromDirectory(path1);
-
-        return "redirect:/products/{id}/edit_photo";
+        return "redirect:/products/{id}/edit_photo?correctFormat=" + correctFormat;
     }
 }
 

@@ -13,7 +13,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
-import java.text.DecimalFormat;
 import java.util.*;
 
 @Service
@@ -43,7 +42,7 @@ public class ProductService {
         double sizeAllProduct = productRepository.findAll().size();
         List<Integer> pages = new ArrayList<>();
         int page = 1;
-        double size = sizeAllProduct/pageable.getPageSize();
+        double size = sizeAllProduct / pageable.getPageSize();
         for (int i = 0; i < size; i++) {
             pages.add(page);
             page++;
@@ -53,13 +52,13 @@ public class ProductService {
 
     public boolean addProduct(String name, Integer price, Category category, List<String> values) {
         for (String value : values) {
-            if(value.isEmpty()) {
+            if (value.isEmpty()) {
                 return false;
             }
         }
         if (name.isEmpty() || price == null) {
             return false;
-        }else {
+        } else {
             Product product = new Product();
             product.setCategory(category);
             product.setName(name);
@@ -91,9 +90,9 @@ public class ProductService {
         int count = 0;
         for (Long optionId : options) {
             Value value = valueRepository.findByOptionIdAndProduct(optionId, product);
-            if (value!=null) {
+            if (value != null) {
                 value.setValue(values.get(count));
-            }else {
+            } else {
                 Value newValue = new Value();
                 newValue.setProduct(product);
                 Option option = optionRepository.findById(optionId).orElseThrow();
@@ -115,8 +114,8 @@ public class ProductService {
         // Меняем значения по id продукта
         for (Option option : options) {
             for (Value value : option.getValue()) {
-                if (value.getProduct()==product){
-                   optionValue.put(option.getId(), value.getValue());
+                if (value.getProduct() == product) {
+                    optionValue.put(option.getId(), value.getValue());
                 }
             }
         }
@@ -138,16 +137,16 @@ public class ProductService {
 
     public float averageScoreReviews(Product product, boolean published) {
         List<Review> reviews = reviewService.getReviewsByProductAndPublished(product, published);
-        if(!(reviews.isEmpty())) {
+        if (!(reviews.isEmpty())) {
             float average = 0;
             int count = 0;
             for (int i = 0; i < reviews.size(); i++) {
                 average += reviews.get(i).getScore();
                 count++;
             }
-            average = average/count;
+            average = average / count;
             return average;
-        }else {
+        } else {
             return 0;
         }
     }
@@ -162,14 +161,14 @@ public class ProductService {
             valueRepository.deleteAll(values);
             productRepository.delete(product);
             return true;
-        }else {
+        } else {
             return false;
         }
     }
 
     public String createDirectoryPhotos(MultipartFile photo, String directoryName) throws Exception {
         String staticPath = "C:\\Users\\Kasht\\IdeaProjects\\shop\\";
-        String dirPath = staticPath+directoryName;
+        String dirPath = staticPath + directoryName;
         Path path = Paths.get(dirPath);
         if (!Files.exists(path)) {
             Files.createDirectories(path);
@@ -184,7 +183,7 @@ public class ProductService {
             Files.copy(photo.getInputStream(), filePath, StandardCopyOption.REPLACE_EXISTING);
             String pathPhoto = directoryName + fileName;
             return pathPhoto;
-        }else {
+        } else {
             return "EmptyFile";
         }
     }
@@ -197,6 +196,14 @@ public class ProductService {
 
     public void deletePhotoFromDirectory(Path pathPrevPhoto) throws IOException {
         Files.deleteIfExists(pathPrevPhoto);
+    }
+
+    public boolean correctFormatFile(MultipartFile photo) {
+        if (photo.getContentType().equals("image/jpeg") || photo.getContentType().equals("image/png")) {
+            return true;
+        }else {
+            return false;
+        }
     }
 
 }
