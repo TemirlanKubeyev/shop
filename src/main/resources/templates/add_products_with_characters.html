@@ -21,10 +21,7 @@
       <button type="submit" class="add-btn none-margin-left">Добавить</button>
     </form>
   </div>
-  <div th:if="${message}" class="error_message message">
-    <span>Новый товар добавлен</span>
-  </div>
-  <div th:unless="${message}" class="error_message message">
+  <div th:if="${empty_data == false}" class="correct-format-message">
     <span>Ошибка добавления товара, необходимо заполнить все поля</span>
   </div>
 </div>

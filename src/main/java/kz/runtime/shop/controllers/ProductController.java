@@ -77,18 +77,14 @@ public class ProductController {
     }
 
     @GetMapping("/add_products_with_chars")
-    public String getProductCharacters(@RequestParam(name = "category") Long id, Model model) {
+    public String getProductCharacters(@RequestParam(name = "category") Long id,
+            @RequestParam (name = "empty_data", required = false, defaultValue = "true") boolean emptyData, Model model) {
         Category category = categoryRepository.findById(id).orElseThrow();
         List<Option> options = category.getOption();
         model.addAttribute("category", category);
         model.addAttribute("options", options);
-        model.addAttribute("message", message);
+        model.addAttribute("empty_data", emptyData);
         return "add_products_with_characters";
-    }
-
-    @GetMapping("/info_page")
-    public String getInfoPage() {
-        return "info_page";
     }
 
     @PostMapping("/add_products_with_chars")
@@ -96,11 +92,14 @@ public class ProductController {
                              @RequestParam(required = false) Integer price, @RequestParam List<String> values) {
         Category category1 = categoryRepository.findById(category).orElseThrow();
         if (!(productService.addProduct(name, price, category1, values))) {
-            message = false;
-        }else {
-            message = true;
+            return "redirect:/add_products_with_chars?category="+category+"&empty_data=false";
         }
-        return "redirect:/add_products_with_chars?category="+category;
+        return "redirect:/products";
+    }
+
+    @GetMapping("/info_page")
+    public String getInfoPage() {
+        return "info_page";
     }
 
     @GetMapping("/products/{id}/edit")
