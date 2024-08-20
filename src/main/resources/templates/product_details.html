@@ -42,6 +42,9 @@
           </div>
           <div th:if="${reviewBlock}" class="published_block">
             <span class="review-had">Оставьте отзыв</span>
+            <div th:if="${emptyParam == true and #authorization.expr('isAuthenticated()')}">
+              <span class="correct-format-message">Необходимо поставить оценку и написать комментарий</span>
+            </div>
             <form method="post" class="form-textarea">
               <textarea name="text" class="review-input-text" placeholder="Напишите отзыв здесь"></textarea>
               <div class="block-for-radio-score">

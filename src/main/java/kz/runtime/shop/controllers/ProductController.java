@@ -136,7 +136,13 @@ public class ProductController {
     }
 
     @GetMapping("/products/{id}/details")
-    public String detailsProduct(@PathVariable (value = "id") long id, Model model) {
+    public String detailsProduct(
+            @PathVariable (value = "id") long id, Model model,
+            @RequestParam (name = "emptyParam", required = false, defaultValue = "false") boolean emptyParam) {
+        if (emptyParam) {
+            model.addAttribute("emptyParam", true);
+        }
+
         Product product = productService.getProduct(id);
         model.addAttribute("product", product);
 
