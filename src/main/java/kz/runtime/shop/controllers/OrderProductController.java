@@ -13,6 +13,7 @@ import kz.runtime.shop.service.OrderService;
 import kz.runtime.shop.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -30,6 +31,9 @@ public class OrderProductController {
 
     @PostMapping("/basket/add_to_order_product")
     public String addOrderProducts(@RequestParam String address) {
+        if (address.isEmpty()) {
+            return "redirect:/basket?addressEmpty=true";
+        }
         User user = userService.getCurrentUser();
         List<Basket> baskets = basketService.getAllProductsInBasket(user);
         orderService.addOrderFormBaskets(user, baskets, address);

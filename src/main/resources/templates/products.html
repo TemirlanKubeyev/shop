@@ -24,7 +24,7 @@
                     <div class="block-for-btn">
                         <br>
                         <div th:if="${@basketService.findProductInBasket(el.getId())}">
-                            <span>Товар добавлен в корзину</span>
+                            <span class="add-basket">Товар добавлен в корзину</span>
                         </div>
                         <p th:text="${el.getPrice()} + ' тг.'" class="product-box-price"></p>
                         <div th:if="${#authorization.expr('hasRole(''admin'')')}" class="block-for-btn">

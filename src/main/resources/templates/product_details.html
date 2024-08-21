@@ -70,7 +70,7 @@
       <div class="review-second-box">
         <div th:each="review : ${reviews}" class="review-block">
           <div class="review-user">
-            <img th:src="@{${review.getUser().getPhotoPath()}}" class="review-user-pic" alt="без фото">
+            <img th:src="@{/images?file=__${review.getUser().getPhotoPath()}__}" class="review-user-pic" alt="без фото">
             <div class="review-user-point">
               <div class="user-info-name-score">
                 <p th:text="${review.getUser().getFirstName()} + ' '

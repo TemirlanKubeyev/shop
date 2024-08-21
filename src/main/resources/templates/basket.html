@@ -56,6 +56,10 @@
                     </div>
                 </form>
             </div>
+            <br>
+            <div th:if="${addressEmpty==true}">
+                <span class="correct-format-message">Заполните адрес доставки</span>
+            </div>
         </div>
     </div>
 </div>

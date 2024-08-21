@@ -152,7 +152,7 @@ public class ProductController {
         model.addAttribute("reviews", reviews);
 
         User currentUser = userService.getCurrentUser();
-        Review review = reviewRepository.findByUserAndProduct(currentUser, product);
+        Review review = reviewRepository.findByUserAndProductAndPublished(currentUser, product, false);
         Review review1 = reviewRepository.findByUserAndProductAndPublished(currentUser, product,true);
 
         if (review==null) {

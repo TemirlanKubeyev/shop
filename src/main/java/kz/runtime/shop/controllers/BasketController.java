@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -24,7 +25,14 @@ public class BasketController {
     private UserService userService;
 
     @GetMapping("/basket")
-    public String getBasketDetails(Model model) {
+    public String getBasketDetails(
+            @RequestParam(name = "addressEmpty", required = false, defaultValue = "false") boolean addressEmpty,
+            Model model) {
+        System.out.println(addressEmpty);
+        if (addressEmpty) {
+            model.addAttribute("addressEmpty", true);
+        }
+
         double total = basketService.getTotalPrice();
         model.addAttribute("total_cost", total);
         User user = userService.getCurrentUser();
@@ -34,25 +42,25 @@ public class BasketController {
     }
 
     @PostMapping("/basket/{id}/delete")
-    public String deleteProductFromBasket(@PathVariable (value = "id") long id) {
+    public String deleteProductFromBasket(@PathVariable(value = "id") long id) {
         basketService.deleteProductFromBasket(id);
         return "redirect:/basket";
     }
 
     @PostMapping("/products/{id}/add_basket")
-    public String addProductToBasket(@PathVariable (value = "id") long id) {
+    public String addProductToBasket(@PathVariable(value = "id") long id) {
         basketService.addProductToBasket(id);
         return "redirect:/products?page=1";
     }
 
     @PostMapping("/basket/{id}/increase")
-    public String increaseQuantity(@PathVariable (value = "id") long id) {
+    public String increaseQuantity(@PathVariable(value = "id") long id) {
         basketService.increaseQuantity(id);
         return "redirect:/basket";
     }
 
     @PostMapping("/basket/{id}/decrease")
-    public String decreaseQuantity(@PathVariable (value = "id") long id) {
+    public String decreaseQuantity(@PathVariable(value = "id") long id) {
         basketService.decreaseQuantity(id);
         return "redirect:/basket";
     }
