@@ -32,6 +32,9 @@ public class SecurityConfig {
             authorizationConfigurer.anyRequest().permitAll();
         });
         httpSecurity.formLogin(formLoginConfigurer -> {
+            formLoginConfigurer.loginPage("/login");
+            formLoginConfigurer.usernameParameter("login");
+            formLoginConfigurer.passwordParameter("password");
             formLoginConfigurer.defaultSuccessUrl("/products");
         });
         return httpSecurity.build();
