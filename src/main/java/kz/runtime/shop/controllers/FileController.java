@@ -15,8 +15,6 @@ import java.nio.file.Paths;
 public class FileController {
     @GetMapping(value = "/images", produces = "image/jpeg")
     public byte[] getFiles(@RequestParam (name = "file") String filePath) throws IOException {
-        //String basePath = "C:\\Users\\Kasht\\IdeaProjects\\shop\\";
-        //FileInputStream fileInputStream = new FileInputStream(filePath);
         Path path = Paths.get(filePath);
         try (InputStream fileInputStream = Files.newInputStream(path)) {
            return fileInputStream.readAllBytes();

@@ -16,19 +16,14 @@ import java.util.List;
 
 @Service
 public class OrderService {
-
     @Autowired
     private OrderRepository orderRepository;
-
     @Autowired
     private OrderProductRepository orderProductRepository;
-
     @Autowired
     private BasketRepository basketRepository;
-
     @Autowired
     private UserService userService;
-
 
     public List<Order> getAllOrders() {
         User currentUser = userService.getCurrentUser();
@@ -75,8 +70,4 @@ public class OrderService {
         }
         return totalCost;
     }
-
-
-
-
 }

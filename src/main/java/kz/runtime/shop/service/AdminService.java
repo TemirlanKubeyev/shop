@@ -20,16 +20,12 @@ import java.util.List;
 
 @Service
 public class AdminService {
-
     @Autowired
     private ReviewRepository reviewRepository;
-
     @Autowired
     private OrderRepository orderRepository;
-
     @Autowired
     private UserService userService;
-
     @Autowired
     private UserRepository userRepository;
 
@@ -102,8 +98,4 @@ public class AdminService {
     public void deletePhotoFromDirectory(Path pathPrevPhoto) throws IOException {
         Files.deleteIfExists(pathPrevPhoto);
     }
-
-
-
-
 }

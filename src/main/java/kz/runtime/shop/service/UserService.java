@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UserService {
-
     @Autowired
     private UserRepository userRepository;
 
@@ -20,8 +19,4 @@ public class UserService {
         String name = authentication.getName();
         return userRepository.findByEmail(name);
     }
-
-
-
-
 }

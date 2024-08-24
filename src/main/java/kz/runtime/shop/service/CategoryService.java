@@ -13,12 +13,8 @@ import java.util.List;
 
 @Service
 public class CategoryService {
-
     @Autowired
     private CategoryRepository categoryRepository;
-
-    @Autowired
-    private OptionService optionService;
 
     public List<Category> getAllCategories() {
         List<Category> categoryList = categoryRepository.findAllByOrderByIdAsc();
@@ -32,6 +28,4 @@ public class CategoryService {
             return true;
         }
     }
-
-
 }

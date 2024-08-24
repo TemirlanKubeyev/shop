@@ -9,13 +9,7 @@ import java.util.List;
 
 public interface ReviewRepository extends JpaRepository<Review, Long> {
     List<Review> findAllByProductAndPublished(Product product, boolean published);
-
     List<Review> findAllByPublished(boolean published);
-
     List<Review> findAllByProduct(Product product);
-
-    Review findByUserAndProduct (User user, Product product);
-
     Review findByUserAndProductAndPublished(User user, Product product, boolean published);
-
 }

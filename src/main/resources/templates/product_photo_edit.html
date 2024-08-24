@@ -23,7 +23,6 @@
     </div>
     <form th:action="'/products/'+${product.getId()}+'/edit_photo'" method="post"
           enctype="multipart/form-data" class="photo-edit">
-<!--      <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/>-->
       <br>
       <input type="file" name="photo">
       <button type="submit" class="add-btn none-margin-left">Готово</button>

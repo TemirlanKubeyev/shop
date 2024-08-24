@@ -7,15 +7,11 @@ import kz.runtime.shop.repositories.ProductRepository;
 import kz.runtime.shop.repositories.ReviewRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
 @Service
 public class ReviewService {
-
     @Autowired
     private ProductRepository productRepository;
     @Autowired

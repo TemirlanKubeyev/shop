@@ -17,7 +17,6 @@ import java.util.*;
 
 @Service
 public class ProductService {
-
     @Autowired
     private ProductRepository productRepository;
     @Autowired
@@ -197,8 +196,4 @@ public class ProductService {
     public void deletePhotoFromDirectory(Path pathPrevPhoto) throws IOException {
         Files.deleteIfExists(pathPrevPhoto);
     }
-
 }
-
-
-
