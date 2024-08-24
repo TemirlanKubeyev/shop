@@ -10,11 +10,12 @@
 <div class="wrapper">
   <div class="container">
     <span class="category-info-text">Выберите категорию товара</span><br>
-    <form action="/add_products_with_chars" method="get" class="select-form">
-      <select name="category" class="category-select">
-        <option th:each="cat :${category}" th:value="${cat.getId()}" th:text="${cat.getName()}"></option>
-      </select>
-    <button type="submit" class="add-btn">Далее</button>
+      <form action="/add_products_with_chars" method="get" class="select-form">
+        <select name="category" class="category-select">
+          <option th:each="cat :${category}" th:value="${cat.getId()}" th:text="${cat.getName()}"></option>
+        </select>
+      <button type="submit" class="add-btn">Далее</button>
+      <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" hidden="hidden"/>
     </form>
   </div>
 </div>

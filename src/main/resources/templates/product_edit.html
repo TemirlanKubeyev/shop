@@ -20,6 +20,7 @@
         <input type="text" th:name="values" th:placeholder="${opt.getOption()} + ': ' + ${values[val.index]}" class="input_edit">
       </div>
       <button type="submit" class="btn reset">Готово</button>
+      <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" hidden="hidden"/>
     </form>
   </div>
 </div>

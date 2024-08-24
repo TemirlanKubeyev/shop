@@ -28,7 +28,6 @@ public class BasketController {
     public String getBasketDetails(
             @RequestParam(name = "addressEmpty", required = false, defaultValue = "false") boolean addressEmpty,
             Model model) {
-        System.out.println(addressEmpty);
         if (addressEmpty) {
             model.addAttribute("addressEmpty", true);
         }

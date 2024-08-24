@@ -17,6 +17,7 @@
       </div>
       <br>
       <button type="submit" class="add-btn">Добавить</button>
+      <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" hidden="hidden"/>
     </form>
     <br>
     <div th:if="${emptyOptionOrNotUniqueCategory == false}">

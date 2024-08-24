@@ -9,19 +9,6 @@
 <header th:insert="blocks/header :: header"></header>
 <div class="wrapper">
   <div class="container">
-    <!--
-    <div class="products-in-order">
-      <h4>
-        <p th:text="'В заказе № ' + ${order.getId()} + ' следующие товары: '" class="order-user-text"></p>
-      </h4>
-      <div th:each="item : ${order_products}">
-        <p th:text="'Название товара: ' + ${item.getProduct().getName()}" class="order-user-text"></p>
-        <p th:text="'Цена товара: ' + ${item.getProduct().getPrice()}" class="order-user-text"></p>
-        <p th:text="'Количество товара: ' + ${item.getQuantityProducts()}" class="order-user-text"></p>
-      </div>
-        <p th:text="'Общая стоимость товаров: ' + ${totalCost}" class="order-user-text"></p>
-    </div>
-    -->
     <p class="list-order-text" th:text="'В заказе № ' + ${order.getId()} + ' следующие товары: '"></p>
     <div class="products-order">
       <div class="orders-container-info">

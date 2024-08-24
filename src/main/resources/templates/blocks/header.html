@@ -1,4 +1,4 @@
-<div th:fragment="header" class="header">
+<div th:fragment="header" class="header" xmlns="http://www.w3.org/1999/html">
     <div class="header-block">
         <img src="/images/logo.jpg" alt="logo" class="logo">
         <div class="header-block-second">
@@ -57,10 +57,13 @@
                 </a>
             </div>
             <div th:if="${#authorization.expr('isAuthenticated()')}">
-                <a href="/logout" class="main-links">
-                    <img src="/images/logout.svg" class="main-image">
-                    <span>Выйти</span>
-                </a>
+                <form action="/logout" class="main-links logout" method="post">
+                    <button class="btn-logout">
+                        <img src="/images/logout.svg" class="main-image">
+                        <span>Выйти</span>
+                    </button>
+                    <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" hidden="hidden"/>
+                </form>
             </div>
         </div>
     </div>

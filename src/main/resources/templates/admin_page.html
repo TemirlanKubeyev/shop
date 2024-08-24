@@ -19,6 +19,7 @@
                 <form action="/admin/homePage" method="post" enctype="multipart/form-data">
                     <input type="file" name="photo">
                     <button type="submit">Готово</button>
+                    <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" hidden="hidden"/>
                 </form>
             </div>
             <div class="user-info">

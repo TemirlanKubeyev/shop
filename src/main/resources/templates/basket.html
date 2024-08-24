@@ -54,6 +54,7 @@
                     <div class="order-text">
                         <span>Оформить заказ</span>
                     </div>
+                    <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" hidden="hidden"/>
                 </form>
             </div>
             <br>

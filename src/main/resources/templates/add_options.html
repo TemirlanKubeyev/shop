@@ -15,6 +15,7 @@
         <input type="text" name="options" placeholder="Введите характеристику" class="input_edit">
       </div>
       <button type="submit" class="btn">Добавить</button>
+      <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" hidden="hidden"/>
     </form>
   </div>
 </div>

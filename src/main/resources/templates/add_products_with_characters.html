@@ -19,6 +19,7 @@
       <input type="text" name="name" placeholder="Название товара" class="input_edit">
       <input type="number" name="price" placeholder="Цена товара" class="input_edit">
       <button type="submit" class="add-btn none-margin-left">Добавить</button>
+      <input th:name="${_csrf.parameterName}" th:value="${_csrf.token}" hidden="hidden"/>
     </form>
   </div>
   <div th:if="${empty_data == false}" class="correct-format-message">
